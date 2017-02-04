@@ -1,7 +1,8 @@
 package com.test.bean;
 
-public class Admin {
-	public static void main(String[] s){
-System.out.println("Hello");
+public class Admin extends User{
+	public Admin(String username, String password) {
+		super(username, password);
+		
 	}
 }
