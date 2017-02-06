@@ -9,8 +9,9 @@ import com.test.bean.Question;
 public interface QuestionDao {
 	boolean insert(Question question) throws IOException, ClassNotFoundException, SQLException;
 	Question search(int question_Id) throws IOException, ClassNotFoundException, SQLException;
-	List<Question> displayAll(String subject) throws IOException, ClassNotFoundException, SQLException;
+	List<Question> displayAll(int subjectId) throws IOException, ClassNotFoundException, SQLException;
 	boolean update(int questionId, Question question) throws IOException, ClassNotFoundException, SQLException;
 	boolean delete(int questionID) throws IOException, ClassNotFoundException, SQLException;
+	
 
 }

@@ -2,12 +2,12 @@ package com.test.bean;
 
 public class Subject {
 	private int subjectId;
-	private String Subject;
+	private String subject;
 	
 	public Subject(int subjectId, String subject) {
 		super();
 		this.subjectId = subjectId;
-		Subject = subject;
+		this.subject = subject;
 	}
 	
 	public int getSubjectId() {
@@ -17,10 +17,10 @@ public class Subject {
 		this.subjectId = subjectId;
 	}
 	public String getSubject() {
-		return Subject;
+		return subject;
 	}
 	public void setSubject(String subject) {
-		Subject = subject;
+		subject = subject;
 	}
 
 	@Override

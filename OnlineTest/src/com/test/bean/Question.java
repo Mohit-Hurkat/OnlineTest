@@ -2,32 +2,34 @@ package com.test.bean;
 
 public class Question {
    private int questionId;
-   private String subject;
+   private int subjectId;
    private String question;
    private int answer;
+   
+   
 @Override
 public String toString() {
-	return "Question [question_id=" + questionId + ", subject=" + subject + ", question=" + question + ", answer="
+	return "Question [question_id=" + questionId + ", subject_id=" + subjectId + ", question=" + question + ", answer="
 			+ answer + "]";
 }
-public Question(int question_id, String subject, String question, int answer) {
+public Question(int question_id, int subjectId, String question, int answer) {
 	super();
 	this.questionId = question_id;
-	this.subject = subject;
+	this.subjectId = subjectId;
 	this.question = question;
 	this.answer = answer;
 }
-public int getQuestion_id() {
+public int getQuestionId() {
 	return questionId;
 }
-public void setQuestion_id(int question_id) {
-	this.questionId = question_id;
+public void setQuestionId(int questionId) {
+	this.questionId = questionId;
 }
-public String getSubject() {
-	return subject;
+public int getSubjectId() {
+	return subjectId;
 }
-public void setSubject(String subject) {
-	this.subject = subject;
+public void setSubjectId(int subjectId) {
+	this.subjectId = subjectId;
 }
 public String getQuestion() {
 	return question;
@@ -41,7 +43,7 @@ public int getAnswer() {
 public void setAnswer(int answer) {
 	this.answer = answer;
 }
-   
+
    
    
    

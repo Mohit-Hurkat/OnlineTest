@@ -12,12 +12,12 @@ import com.test.bean.Question;
 import com.test.helper.JDBCConnection;
 
 public class QuestionDaoImpl implements QuestionDao{
-	private static final String UPDATE_QUERY = "UPDATE QUESTIONS SET SUBJECT = ?, QUESTION = ?," + 
-			"ANSWER = ? WHERE questionId = ?";
-	private static final String DELETE_QUERY = "DELETE FROM QUESTIONS WHERE questionId = ?";
-	private static final String SELECT_ALL_QUERY = "SELECT * FROM QUESTIONS WHERE SUBJECT= ?";	
-	private static final String SELECT_QUERY = "SELECT * FROM QUESTIONS WHERE questionId = ?";
-    private static final String INSERT_QUERY="INSERT INTO QUESTIONS(questionId,SUBJECT,QUESTION,ANSWER) VALUES(?,?,?,?)";
+	private static final String UPDATE_QUERY = "UPDATE QUESTIONS SET SUBJECT_ID = ?, QUESTION = ?," + 
+			"ANSWER = ? WHERE QUESTION_ID = ?";
+	private static final String DELETE_QUERY = "DELETE FROM QUESTIONS WHERE QUESTION_ID = ?";
+	private static final String SELECT_ALL_QUERY = "SELECT * FROM QUESTIONS WHERE SUBJECT_ID= ?";	
+	private static final String SELECT_QUERY = "SELECT * FROM QUESTIONS WHERE QUESTION_ID = ?";
+    private static final String INSERT_QUERY="INSERT INTO QUESTIONS(QUESTION_ID,SUBJECT_ID,QUESTION,ANSWER) VALUES(?,?,?,?)";
     private static final String GET_MAX_ID_QUERY = "SELECT COALESCE(MAX(questionId), 0) AS COUNT FROM QUESTIONS";
    
     @Override
@@ -27,7 +27,7 @@ public class QuestionDaoImpl implements QuestionDao{
 		int questionId = this.getMaxId() + 1;
 		PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY);
 		preparedStatement.setInt(1, questionId);
-		preparedStatement.setString(2, question.getSubject());
+		preparedStatement.setInt(2, question.getSubjectId());
 		preparedStatement.setString(3, question.getQuestion());
 		preparedStatement.setInt(4, question.getAnswer());
 		numAffectedRows = preparedStatement.executeUpdate();  
@@ -45,10 +45,10 @@ public class QuestionDaoImpl implements QuestionDao{
 		preparedStatement.setInt(1, questionId);
 		ResultSet rs = preparedStatement.executeQuery();
 		if(rs.next()){
-			String subject = rs.getString("SUBJECT");
+			int subjectId = rs.getInt("SUBJECT_ID");
 			String question1 = rs.getString("QUESTION");
 			int answer = rs.getInt("ANSWER");
-			question = new Question(questionId, subject, question1, answer);
+			question = new Question(questionId, subjectId, question1, answer);
 			questionList.add(question);
 		}
 		rs.close();
@@ -58,17 +58,17 @@ public class QuestionDaoImpl implements QuestionDao{
 	}
     
     @Override
-	public List<Question> displayAll(String subject) throws IOException,ClassNotFoundException, SQLException{
+	public List<Question> displayAll(int subjectId) throws IOException,ClassNotFoundException, SQLException{
     	List<Question> questionList = new ArrayList<>();
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_QUERY);
-		preparedStatement.setString(1, subject);
+		preparedStatement.setInt(1, subjectId);
 		ResultSet rs = preparedStatement.executeQuery();
 		while(rs.next()){
 			int questionId = rs.getInt("QUESTION_ID");
 			String question1 = rs.getString("QUESTION");
 			int answer = rs.getInt("ANSWER");
-			Question question = new Question(questionId, subject, question1, answer);
+			Question question = new Question(questionId, subjectId, question1, answer);
 			questionList.add(question);
 		}
 		rs.close();
@@ -81,7 +81,7 @@ public class QuestionDaoImpl implements QuestionDao{
 	public boolean update(int questionId, Question question)throws IOException, ClassNotFoundException, SQLException {
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
-		preparedStatement.setString(1, question.getSubject());
+		preparedStatement.setInt(1, question.getSubjectId());
 		preparedStatement.setString(2, question.getQuestion());
 		preparedStatement.setInt(3, question.getAnswer());
 		preparedStatement.setInt(4, questionId);
