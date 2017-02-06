@@ -12,13 +12,13 @@ import com.test.bean.Question;
 import com.test.helper.JDBCConnection;
 
 public class QuestionDaoImpl implements QuestionDao{
-	private static final String UPDATE_QUERY = "UPDATE QUESTIONs SET SUBJECT = ?, QUESTION = ?," + 
+	private static final String UPDATE_QUERY = "UPDATE QUESTIONS SET SUBJECT = ?, QUESTION = ?," + 
 			"ANSWER = ? WHERE questionId = ?";
-	private static final String DELETE_QUERY = "DELETE FROM QUESTIONs WHERE questionId = ?";
+	private static final String DELETE_QUERY = "DELETE FROM QUESTIONS WHERE questionId = ?";
 	private static final String SELECT_ALL_QUERY = "SELECT * FROM QUESTIONS WHERE SUBJECT= ?";	
 	private static final String SELECT_QUERY = "SELECT * FROM QUESTIONS WHERE questionId = ?";
     private static final String INSERT_QUERY="INSERT INTO QUESTIONS(questionId,SUBJECT,QUESTION,ANSWER) VALUES(?,?,?,?)";
-    private static final String GET_MAX_ID_QUERY = "SELECT COALESCE(MAX(questionId), 0) AS COUNT FROM PURCHASE";
+    private static final String GET_MAX_ID_QUERY = "SELECT COALESCE(MAX(questionId), 0) AS COUNT FROM QUESTIONS";
    
     @Override
 	public boolean insert(Question question) throws IOException, ClassNotFoundException, SQLException{
