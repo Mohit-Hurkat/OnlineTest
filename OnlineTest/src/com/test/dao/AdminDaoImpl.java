@@ -26,6 +26,7 @@ public class AdminDaoImpl implements AdminDao{
 		//System.out.println(numAffectedRows);
 		return numAffectedRows > 0;
 	}
+	
 	@Override
 	public boolean update(String username,Admin admin) throws IOException, ClassNotFoundException, SQLException {
 		Connection connection = JDBCConnection.getConnection();

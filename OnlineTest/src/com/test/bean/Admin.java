@@ -5,6 +5,5 @@ public class Admin extends User{
 	
 	public Admin(String password) {
 		super(USER_NAME, password);
-		
 	}
 }
