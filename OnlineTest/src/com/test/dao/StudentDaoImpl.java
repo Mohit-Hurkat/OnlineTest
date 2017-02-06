@@ -76,7 +76,7 @@ public class StudentDaoImpl implements StudentDao{
 		preparedStatement.setString(4, newStudent.getPhone());
 		preparedStatement.close();
 		connection.close();
-		return false;
+		return true;
 	}
 
 	@Override
