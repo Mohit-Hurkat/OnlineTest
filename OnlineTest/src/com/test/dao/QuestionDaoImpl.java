@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.test.bean.Question;
-import com.test.bean.Student;
 import com.test.helper.JDBCConnection;
 
 public class QuestionDaoImpl implements QuestionDao{
