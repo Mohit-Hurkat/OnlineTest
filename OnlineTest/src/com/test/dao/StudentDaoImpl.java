@@ -14,11 +14,11 @@ import com.test.helper.JDBCConnection;
 
 public class StudentDaoImpl implements StudentDao{
 	private static final String UPDATE_QUERY = "UPDATE STUDENT SET USERNAME = ?, PASSWORD = ?," + 
-			"NAME = ? PHONE = ? WHERE USERNAME = ?";
+			"NAME = ?, PHONE = ?,EMAIL =? WHERE USERNAME = ?";
 	private static final String DELETE_QUERY = "DELETE FROM STUDENT WHERE USERNAME = ?";
 	private static final String SELECT_ALL_QUERY = "SELECT * FROM STUDENT";	
 	private static final String SELECT_QUERY = "SELECT * FROM STUDENT WHERE USERNAME = ?";
-    private static final String INSERT_QUERY="INSERT INTO STUDENT(USERNAME,PASSWORD,NAME,PHONE) VALUES(?,?,?,?)";
+    private static final String INSERT_QUERY="INSERT INTO STUDENT(USERNAME,PASSWORD,NAME,PHONE,EMAIL) VALUES(?,?,?,?,?)";
 	@Override
 	public boolean insert(Student student) throws IOException, ClassNotFoundException, SQLException{
 		int numAffectedRows;
@@ -28,6 +28,7 @@ public class StudentDaoImpl implements StudentDao{
 		preparedStatement.setString(2, student.getPassword());
 		preparedStatement.setString(3, student.getName());
 		preparedStatement.setString(4, student.getPhone());
+		preparedStatement.setString(4, student.getEmail());
 		numAffectedRows = preparedStatement.executeUpdate();  
 		//System.out.println(numAffectedRows);
 		return numAffectedRows > 0;
@@ -44,7 +45,8 @@ public class StudentDaoImpl implements StudentDao{
 		if(rs.next()){    //ask why next
 			String StudentName = rs.getString("NAME");
 			String StudentPhone = rs.getString("PHONE");
-			student = new Student(username,"********",StudentName,StudentPhone);
+			String StudentEmail = rs.getString("Email");
+			student = new Student(username,"********",StudentName,StudentPhone, StudentEmail);
 			studentList.add(student);
 		}
 		return student;
@@ -60,7 +62,8 @@ public class StudentDaoImpl implements StudentDao{
 			String StudentUsername = rs.getString("USERNAME");
 			String StudentName = rs.getString("NAME");
 			String StudentPhone = rs.getString("PHONE");
-			Student student = new Student(StudentUsername,"********",StudentName,StudentPhone);
+			String StudentEmail = rs.getString("Email");
+			Student student = new Student(StudentUsername,"********",StudentName,StudentPhone, StudentEmail);
 			studentList.add(student);
 		}
 		return studentList;
