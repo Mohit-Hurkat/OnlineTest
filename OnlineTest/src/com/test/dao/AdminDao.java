@@ -7,7 +7,7 @@ import com.test.bean.Admin;
 
 public interface AdminDao {
 	public boolean insert(Admin admin)throws IOException, ClassNotFoundException, SQLException;
-	public boolean update(Admin newAdmin)throws IOException, ClassNotFoundException, SQLException;
 	public boolean delete(String username) throws IOException, ClassNotFoundException, SQLException;
+	boolean update(String username, Admin admin) throws IOException, ClassNotFoundException, SQLException;
 	
 }
