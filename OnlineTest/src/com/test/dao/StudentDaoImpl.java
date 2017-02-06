@@ -13,7 +13,7 @@ import com.test.bean.Student;
 import com.test.helper.JDBCConnection;
 
 public class StudentDaoImpl implements StudentDao{
-	private static final String UPDATE_QUERY = "UPDATE STUDENT SET USERNAME = ?, PASSWORD = ?," + 
+	private static final String UPDATE_QUERY = "UPDATE STUDENT SET PASSWORD = ?," + 
 			"NAME = ?, PHONE = ?,EMAIL =? WHERE USERNAME = ?";
 	private static final String DELETE_QUERY = "DELETE FROM STUDENT WHERE USERNAME = ?";
 	private static final String SELECT_ALL_QUERY = "SELECT * FROM STUDENT";	
@@ -73,10 +73,11 @@ public class StudentDaoImpl implements StudentDao{
 	public boolean update(String username, Student newStudent)throws IOException, ClassNotFoundException, SQLException {
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
-		preparedStatement.setString(1, newStudent.getUsername());
-		preparedStatement.setString(2, newStudent.getPassword());
-		preparedStatement.setString(3, newStudent.getName());
-		preparedStatement.setString(4, newStudent.getPhone());
+		preparedStatement.setString(1, newStudent.getPassword());
+		preparedStatement.setString(2, newStudent.getName());
+		preparedStatement.setString(3, newStudent.getPhone());
+		preparedStatement.setString(4, newStudent.getEmail());
+		preparedStatement.setString(5, username);
 		preparedStatement.close();
 		connection.close();
 		return true;
