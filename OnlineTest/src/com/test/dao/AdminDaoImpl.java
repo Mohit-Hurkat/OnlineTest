@@ -57,11 +57,11 @@ public class AdminDaoImpl implements AdminDao{
 		//List<Customer> cList = new ArrayList<>();
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_QUERY);
-		preparedStatement.setString(1, Admin.USER_NAME);
+		preparedStatement.setString(1, admin.getUsername());
 		ResultSet rs = preparedStatement.executeQuery();
 		if(rs.next()){
 			String pass = rs.getString("PASSWORD");
-			admin = new Admin(pass);
+			admin = new Admin(admin.getUsername(),pass);
 		}
 		preparedStatement.close();
 		connection.close();
