@@ -11,7 +11,7 @@ import com.test.helper.JDBCConnection;
 
 public class AdminDaoImpl implements AdminDao{
 	private static final String UPDATE_QUERY = "UPDATE ADMIN SET PASSWORD = ? WHERE USERNAME = ?";
-	private static final String INSERT_QUERY="INSERT INTO ADMIN(USERNAME,PASSWORD) VALUES(?,?,?,?)";
+	private static final String INSERT_QUERY="INSERT INTO ADMIN(USERNAME,PASSWORD) VALUES(?,?)";
 	private static final String DELETE_QUERY = "DELETE FROM ADMIN WHERE USERNAME = ?";
 	private static final String SELECT_QUERY = "SELECT * FROM ADMIN WHERE USERNAME = ?";
 	
@@ -28,10 +28,10 @@ public class AdminDaoImpl implements AdminDao{
 	}
 	
 	@Override
-	public boolean update(String username,Admin admin) throws IOException, ClassNotFoundException, SQLException {
+	public boolean update(String username,String password) throws IOException, ClassNotFoundException, SQLException {
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
-		preparedStatement.setString(1, admin.getPassword());
+		preparedStatement.setString(1, password);
 		preparedStatement.setString(2, username);
 		preparedStatement.close();
 		connection.close();
@@ -39,16 +39,26 @@ public class AdminDaoImpl implements AdminDao{
 	}
 	
 	@Override
-	public boolean delete(String username) throws IOException, ClassNotFoundException, SQLException {
-		int updateCount;
-		Connection connection = JDBCConnection.getConnection();
-		PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
-		preparedStatement.setString(1, username);
-		preparedStatement.execute();
-		updateCount = preparedStatement.getUpdateCount();
-		preparedStatement.close();
-		connection.close();
-		return updateCount > 0;
+	public boolean delete(String admin,String username) throws IOException, ClassNotFoundException, SQLException {
+		String adm="admin";
+		if(admin.equals(adm)){
+			if(username.equals(adm))
+			{	
+				System.out.println("Can't Delete The System Admin.");
+				return false;
+			}
+				int updateCount;
+				Connection connection = JDBCConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
+			preparedStatement.setString(1, username);
+			preparedStatement.execute();
+			updateCount = preparedStatement.getUpdateCount();
+			preparedStatement.close();
+			connection.close();
+			return updateCount > 0;
+			}
+		System.out.println("Unauthorized Access.");
+		return false;
 	}
 	
 	@Override
