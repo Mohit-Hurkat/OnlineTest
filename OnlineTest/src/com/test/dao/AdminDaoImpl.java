@@ -63,7 +63,7 @@ public class AdminDaoImpl implements AdminDao{
 	
 	@Override
 	public Admin retrieveAdminRecord() throws IOException, ClassNotFoundException, SQLException{
-		Admin admin=null;
+		Admin admin=new Admin("admin", null);
 		//List<Customer> cList = new ArrayList<>();
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_QUERY);
