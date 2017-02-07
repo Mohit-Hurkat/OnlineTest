@@ -12,27 +12,27 @@ public class QuestionLogic
 {
 	private QuestionDao qdao=new QuestionDaoImpl();
 	
-	boolean insert(Question question) throws IOException, ClassNotFoundException, SQLException
+	public boolean insert(Question question) throws IOException, ClassNotFoundException, SQLException
 	{
 		return qdao.insert(question);
 		
 	}
-	Question search(int question_Id) throws IOException, ClassNotFoundException, SQLException
+	public Question search(int question_Id) throws IOException, ClassNotFoundException, SQLException
 	{
 		return qdao.search(question_Id);
 		
 	}
-	List<Question> displayAll(int subjectId) throws IOException, ClassNotFoundException, SQLException
+	public List<Question> displayAll(int subjectId) throws IOException, ClassNotFoundException, SQLException
 	{
 		return qdao.displayAll(subjectId);
 		
 	}
-	boolean update(int questionId, Question question) throws IOException, ClassNotFoundException, SQLException
+	public boolean update(int questionId, Question question) throws IOException, ClassNotFoundException, SQLException
 	{
 		return qdao.update(questionId, question);
 		
 	}
-	boolean delete(int questionID) throws IOException, ClassNotFoundException, SQLException
+	public boolean delete(int questionID) throws IOException, ClassNotFoundException, SQLException
 	{
 		return qdao.delete(questionID);
 		

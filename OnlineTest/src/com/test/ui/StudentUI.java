@@ -14,9 +14,9 @@ public class StudentUI
 {
 	private StudentDaoImpl studentDao=new StudentDaoImpl();
 	private Student student=null;
-	private static final String STUDENT_MENU_OPTIONS ="1.Update Student Record"+	
-			"\n" + "2.Give Online Test"+	
-			"\n" + "3.Exit"; 
+	private static final String STUDENT_MENU_OPTIONS ="1. Update Student Record"+	
+			"\n" + "2. Give Online Test"+	
+			"\n" + "3. Exit"; 
 	
 	public void displayMenu()
 	{
@@ -55,9 +55,8 @@ public class StudentUI
 		
 
 		case 3:
-			 
+			return true;
 		
-			break;
 		
 		default:
 			System.out.println("Invalid choice");

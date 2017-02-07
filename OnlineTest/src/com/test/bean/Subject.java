@@ -20,12 +20,12 @@ public class Subject {
 		return subject;
 	}
 	public void setSubject(String subject) {
-		subject = subject;
+		this.subject = subject;
 	}
 
 	@Override
 	public String toString() {
-		return "Subject [subjectId=" + subjectId + ", Subject=" + Subject + "]";
+		return "Subject [subjectId=" + subjectId + ", Subject=" + subject + "]";
 	}
 	
 	
