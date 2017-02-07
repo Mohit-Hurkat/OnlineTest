@@ -11,8 +11,9 @@ import com.test.dao.AdminDaoImpl;
 
 public class AdminLogic {
 	private AdminDao adminDao=new AdminDaoImpl();
-	public boolean update(String username, Admin admin) throws IOException, ClassNotFoundException, SQLException{
-		return adminDao.update(username, admin);
+	
+	public boolean update(String username, String password) throws IOException, ClassNotFoundException, SQLException{
+		return adminDao.update(username, password);
 	}
 	
 	public Admin retrieveAdminRecord() throws IOException, ClassNotFoundException, SQLException {
@@ -21,7 +22,7 @@ public class AdminLogic {
 	public boolean insert(Admin admin)throws IOException, ClassNotFoundException, SQLException{
 		return adminDao.insert(admin);
 	}
-	public boolean delete(String username) throws IOException, ClassNotFoundException, SQLException{
-		return adminDao.delete(username);
+	public boolean delete(String admin,String username) throws IOException, ClassNotFoundException, SQLException{
+		return adminDao.delete(admin,username);
 	}
 }
