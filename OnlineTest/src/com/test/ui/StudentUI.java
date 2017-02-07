@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.test.bean.Student;
+import com.test.bl.TestLogic;
 import com.test.dao.StudentDaoImpl;
 
  
@@ -13,28 +14,29 @@ import com.test.dao.StudentDaoImpl;
 public class StudentUI 
 {
 	private StudentDaoImpl studentDao=new StudentDaoImpl();
+	private TestLogic tbl=new TestLogic();
 	private Student student=null;
 	private static final String STUDENT_MENU_OPTIONS ="1. Update Student Record"+	
 			"\n" + "2. Give Online Test"+	
 			"\n" + "3. Exit"; 
-	
-	public void displayMenu()
+	private static final String CHOICE_MSG = "Enter your choice";
+	public void displayMenu(String username)
 	{
+		student.setUsername(username);
 		System.out.println(STUDENT_MENU_OPTIONS);
 	}
 	
 	public boolean choice(int choice) throws IOException, ClassNotFoundException, SQLException 
-	{
+	{	
+		String username,studentName,pass,phone,email;
 		Scanner sc= new Scanner(System.in);
 		switch(choice)
 		{
 		
 		case 1:
-			String userName,studentName,pass,phone,email;
 			System.out.println("Enter The Student's User Name You Want To Update: ");
-			userName=sc.next();
+			username=sc.next();
 			 System.out.println("Enter New Details :\n");
-			
 			 System.out.println("Enter New Student Name:");
 			 studentName=sc.next();
 			 System.out.println("Enter New Password:");
@@ -44,13 +46,15 @@ public class StudentUI
 			 System.out.println("Enter New E-Mail Id:");
 			 email=sc.next();
 			 
-			 student=new Student(userName,pass,studentName, phone, email);
-			 studentDao.update(userName, student);
+			 student=new Student(username,pass,studentName, phone, email);
+			 studentDao.update(username, student);
 			 
 			break;
 		
 		case 2:
-			 
+			 System.out.println("Enter Subject-Id");
+			 int subjectId=sc.nextInt();
+			 tbl.giveTest(student.getUsername(), subjectId);
 			break;
 		
 
@@ -60,7 +64,7 @@ public class StudentUI
 		
 		default:
 			System.out.println("Invalid choice");
-			displayMenu();
+			displayMenu(student.getUsername());
 		}
 		return true;
 	}

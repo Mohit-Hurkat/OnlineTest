@@ -17,7 +17,7 @@ public class AdminUI
 	private static final String MENU_OPTIONS = "1.Admin Related Tasks" +
 			"\n" + "2. Student Realted Tasks" + "\n" + "3. Question Related Tasks" +
 			"\n" + "4. Subject Related Tasks" + "\n" + "5. Exit"; 
-	 
+	private static final String CHOICE_MSG = "Enter your choice";
 	public void displayMenu()
 	{
 		System.out.println(MENU_OPTIONS);
@@ -25,21 +25,39 @@ public class AdminUI
 	
 	public boolean choice(int choice) throws ClassNotFoundException, IOException, SQLException
 	{
+		boolean truthVal = false;
+		Scanner scanner=new Scanner(System.in);
+		
 		switch(choice)
 		{
 		case 1:
-			adminUi.choice(1);
-			break;
+			do{
+			adminUi.displayMenu();;
+			System.out.print(CHOICE_MSG + ": ");
+			truthVal=adminUi.choice(scanner.nextInt());
+		} while (truthVal);
+		break;
 		case 2:
-			studentUi.choice(2);
-			 break;
+			do{
+				studentUi.displayMenu();;
+				System.out.print(CHOICE_MSG + ": ");
+				truthVal=studentUi.choice(scanner.nextInt());
+			} while (truthVal);
+			break;
 		case 3:
-			questionUi.choice(3);
+			do{
+				questionUi.displayMenu();;
+				System.out.print(CHOICE_MSG + ": ");
+				truthVal=questionUi.choice(scanner.nextInt());
+			} while (truthVal);
 			break;
 		case 4:
-			subjectUi.choice(4);
-			break;
-			
+			do{
+				subjectUi.displayMenu();;
+				System.out.print(CHOICE_MSG + ": ");
+				truthVal=subjectUi.choice(scanner.nextInt());
+			} while (truthVal);
+			break;			
 		case 5:
 			return false;
 		default:	

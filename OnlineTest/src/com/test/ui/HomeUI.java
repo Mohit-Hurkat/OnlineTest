@@ -80,7 +80,7 @@ public class HomeUI {
 			if(result.getValue() != false){
 			StudentUI StudentUI = new StudentUI();
 			do {
-				StudentUI.displayMenu();
+				StudentUI.displayMenu(username);
 				System.out.print(CHOICE_MSG + ": ");
 				truthVal = StudentUI.choice(scanner.nextInt());
 			} while(truthVal);
