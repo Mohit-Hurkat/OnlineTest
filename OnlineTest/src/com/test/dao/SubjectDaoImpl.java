@@ -65,11 +65,12 @@ public class SubjectDaoImpl implements SubjectDao {
 	}
 
 	@Override
-	public List<Subject> displayAll(String subject) throws IOException, ClassNotFoundException, SQLException {
+	public List<Subject> displayAll() throws IOException, ClassNotFoundException, SQLException {
+		Subject subject = null;
 		List<Subject> subjectList = new ArrayList<>();
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_QUERY);
-		preparedStatement.setString(1, subject);
+		preparedStatement.setString(1, subject.getSubject());
 		ResultSet rs = preparedStatement.executeQuery();
 		while(rs.next()){
 			int subjectId = rs.getInt("SUBJECT_ID");
