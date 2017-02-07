@@ -59,13 +59,14 @@ public class StudentUI
 		
 
 		case 3:
-			return true;
+			return false;
 		
 		
 		default:
 			System.out.println("Invalid choice");
 			displayMenu(student.getUsername());
 		}
+		
 		return true;
 	}
 

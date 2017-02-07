@@ -35,7 +35,6 @@ public class HomeUI {
 	public boolean choice(int choice) throws ClassNotFoundException, IOException, SQLException{
 		Scanner scanner=new Scanner(System.in);
 		StudentData sd=new StudentData();
-		
 		switch(choice){
 		case 1:
 			sd.input();
@@ -58,7 +57,7 @@ public class HomeUI {
 			String username = scanner.next();
 			System.out.println(PASSWORD_PROMPT + ": ");
 			String password = scanner.next();
-			boolean truthVal = false;
+			boolean truthVal1 = false;
 			Admin admin=adminbl.retrieveAdminRecord();
 			if(username.equals(admin.getUsername())){
 				Map.Entry<Admin, Boolean> result =aa.authenticate(username, password);
@@ -67,8 +66,8 @@ public class HomeUI {
 							do{
 								adminUI.displayMenu();
 								System.out.print(CHOICE_MSG + ": ");
-								truthVal = adminUI.choice(scanner.nextInt());
-							} while (truthVal);
+								truthVal1 = adminUI.choice(scanner.nextInt());
+							} while (truthVal1);
 						}
 						else{
 							System.out.println(AUTH_FAILED_MSG);
@@ -82,8 +81,8 @@ public class HomeUI {
 			do {
 				StudentUI.displayMenu(username);
 				System.out.print(CHOICE_MSG + ": ");
-				truthVal = StudentUI.choice(scanner.nextInt());
-			} while(truthVal);
+				truthVal1 = StudentUI.choice(scanner.nextInt());
+			} while(truthVal1);
 		}
 		else{
 			System.out.println(AUTH_FAILED_MSG);
@@ -97,6 +96,7 @@ public class HomeUI {
 			System.out.println(INVALID_CHOICE_MSG);
 		}
 		
-		return false;
+		return true;
 	}
+
 }
