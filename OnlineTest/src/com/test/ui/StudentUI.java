@@ -42,8 +42,6 @@ public class StudentUI
 		{
 		
 		case 1:
-			System.out.println("Enter The Student's User Name You Want To Update: ");
-			username=sc.next();
 			 System.out.println("Enter New Details :\n");
 			 System.out.println("Enter New Student Name:");
 			 studentName=sc.next();
