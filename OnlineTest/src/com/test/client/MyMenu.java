@@ -14,13 +14,10 @@ public class MyMenu {
 		boolean truthVal;
 		do{
 			homeUI.displayMenu();
-			System.out.println("enter choice : ");
+			System.out.println("Enter Your choice : ");
 			int ch=sc.nextInt();
 			truthVal = homeUI.choice(ch);
 		} while(truthVal);
 	}
 	
-	
-	
-
 }

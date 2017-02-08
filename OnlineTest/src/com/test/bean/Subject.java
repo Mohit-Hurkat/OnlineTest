@@ -25,7 +25,7 @@ public class Subject {
 
 	@Override
 	public String toString() {
-		return "Subject [subjectId=" + subjectId + ", Subject=" + subject + "]";
+		return "Subject Id=" + subjectId + ",\t Subject=" + subject;
 	}
 	
 	

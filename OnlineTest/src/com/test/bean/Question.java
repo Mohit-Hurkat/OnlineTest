@@ -26,13 +26,11 @@ public Question(int questionId, int subjectId, String question, int answer, Stri
 }
 @Override
 public String toString() {
-	return "Question [questionId=" + questionId + ", subjectId=" + subjectId + ", question=" + question + ", answer="
-			+ answer + ", choice1=" + choice1 + ", choice2=" + choice2 + ", choice3=" + choice3 + ", choice4=" + choice4
-			+ "]";
+	return "SubjectId=" + subjectId +" QuestionId=" + questionId + "\nQuestion=" + question + ",\nAnswer="+ answer;
 }
 public String display() {
-	return "Question [question=" + question + "\n 1. " + choice1 + "\n 2. " + choice2 + "\n 3. " + choice3
-			+ "\n 4. " + choice4 + "]";
+	return "Question=" + question + "\n1." + choice1 + "\n2." + choice2 + "\n3." + choice3
+			+ "\n4." + choice4;
 }
 public int getQuestionId() {
 	return questionId;

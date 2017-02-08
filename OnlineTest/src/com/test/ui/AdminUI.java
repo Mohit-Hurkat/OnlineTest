@@ -15,20 +15,20 @@ public class AdminUI
 	private AdminQuestionUI questionUi=new AdminQuestionUI();
 	private AdminSubjectUI subjectUi=new AdminSubjectUI();
 	private static final String MENU_OPTIONS = "1.Admin Related Tasks" +
-			"\n" + "2. Student Realted Tasks" + "\n" + "3. Question Related Tasks" +
-			"\n" + "4. Subject Related Tasks" + "\n" + "5. Exit"; 
-	private static final String CHOICE_MSG = "Enter your choice";
+			"\n" + "2.Student Realted Tasks" + "\n" + "3.Question Related Tasks" +
+			"\n" + "4.Subject Related Tasks" + "\n" + "5.Exit"+"\n"; 
+	private static final String CHOICE_MSG = "Enter Your Choice";
 	private String username;
 	private AdminAdminUI adminUi=new AdminAdminUI(username);
 	public AdminUI(String username) {
 		super();
 		this.username = username;
-		System.out.println(username);
 	}
 	
 	
 	public void displayMenu()
 	{
+		System.out.println("Welcome ADMIN\n");
 		System.out.println(MENU_OPTIONS);
 	}
 	

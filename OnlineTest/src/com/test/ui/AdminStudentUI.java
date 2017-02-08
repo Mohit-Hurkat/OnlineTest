@@ -12,25 +12,34 @@ import com.test.bl.StudentLogic;
 public class AdminStudentUI
 {
 	private StudentLogic studentbl = new StudentLogic();
-	private static final String MENU_OPTIONS_STUDENT = "1.Search Student" +
-			"\n 2. Delete Student" + "\n 3.List All Students"+ " \n 4. Exit";
+	private static final String MENU_OPTIONS_STUDENT = "\n"+"1.Search Student" +
+			"\n2.Delete Student" + "\n3.List All Students"+ " \n4.Exit"+"\n";
 	public void displayMenu(){
 		System.out.println(MENU_OPTIONS_STUDENT);
 	}
 	public boolean choice(int choice) throws ClassNotFoundException, IOException, SQLException{
-		Scanner scanner=new Scanner(System.in);		
+		Scanner scanner=new Scanner(System.in);	
+		Student student=null;
 		String username;
 		switch(choice)
 		{
 		case 1:
 			System.out.println("Enter Student's UserName You Want To Search:");
 			username=scanner.next();
-			studentbl.search(username);
+			student=studentbl.search(username);
+			System.out.println(student);
 			break;
 		case 2:
 			System.out.println("Enter Student's UserName You Want To Delete:");
 			username=scanner.next();
-			studentbl.delete(username);
+			if(studentbl.delete(username))
+			{
+				System.out.println("Succefully Deleted.");
+			}
+			else
+			{
+				System.out.println("Data Is Not Found.Please Try Again.");
+			}
 			break;
 		case 3:
 			System.out.println("List Of All Students:");

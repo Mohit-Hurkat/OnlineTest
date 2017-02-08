@@ -9,7 +9,7 @@ import com.test.bl.AdminLogic;
 
 public class AdminAdminUI {
 	private AdminLogic adminbl = new AdminLogic();
-	private static final String MENU_OPTIONS_ADMIN = "1. Update Admin Password" + " \n 2. Exit";
+	private static final String MENU_OPTIONS_ADMIN = "\n1.Update Admin Password" + " \n2.Exit";
 	private String username;
 	public void displayMenu(){
 		System.out.println(MENU_OPTIONS_ADMIN);
@@ -18,7 +18,6 @@ public class AdminAdminUI {
 	public AdminAdminUI(String username) {
 		super();
 		this.username = username;
-		System.out.println(username);
 	}
 	
 	public boolean choice(int choice) throws ClassNotFoundException, IOException, SQLException{

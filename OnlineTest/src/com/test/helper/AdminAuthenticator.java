@@ -10,8 +10,6 @@ import com.test.dao.AdminDao;
 import com.test.dao.AdminDaoImpl;
 
 
-
-
 public class AdminAuthenticator {
 	public Map.Entry<Admin, Boolean> authenticate(String username, String password) throws ClassNotFoundException, IOException, SQLException{
 		AdminDao adminDao = new AdminDaoImpl();

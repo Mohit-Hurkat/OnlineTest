@@ -11,15 +11,15 @@ public class StudentData {
 	public void input(){
 		try {
 			System.out.println("Enter Username : ");
-			username=sc.next();
+			username=sc.nextLine();
 			System.out.println("Enter Password : ");
-			password=sc.next();
+			password=sc.nextLine();
 			System.out.println("Enter Name : ");
-			name=sc.next();
+			name=sc.nextLine();
 			System.out.println("Enter Phone Number : ");
-			phone=sc.next();
+			phone=sc.nextLine();
 			System.out.println("Enter Email : ");
-			email=sc.next();
+			email=sc.nextLine();
 			student=new Student(username,password,name,phone,email);
 		} catch (Exception e) {
 			System.out.println("Enter Appropriate Information");

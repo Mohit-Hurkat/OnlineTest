@@ -11,8 +11,8 @@ import com.test.bl.SubjectLogic;
 public class AdminSubjectUI {
 	private SubjectLogic subjectbl=new SubjectLogic();
 	private static final String MENU_OPTIONS_SUBJECT = "1.Insert a Subject" +
-			"\n 2.Update a Subject" + "\n 3.Delete a Subject"+ " \n 4.Search a Subject"+
-			"\n 5.Display all Subjects"+ "\n 6.Exit";
+			"\n2.Update a Subject" + "\n3.Delete a Subject"+ " \n4.Search a Subject"+
+			"\n5.Display all Subjects"+ "\n6.Exit";
 	public void displayMenu(){
 		System.out.println(MENU_OPTIONS_SUBJECT);
 	}
@@ -32,8 +32,14 @@ public class AdminSubjectUI {
 			System.out.println("Enter Subject Name:");
 			sub=scanner.next();
 			subject=new Subject(subId,sub);
-			subjectbl.insert(subject);
-			System.out.println("One Subject Successfully Inserted.");
+			if(subjectbl.insert(subject))
+			{
+				System.out.println("One Subject Successfully Inserted.");
+			}
+			else
+			{
+				System.out.println("Not Inserted.");
+			}
 			break;
 		case 2:
 			System.out.println("Enter The Subject Id You Want To Update:");
@@ -41,14 +47,26 @@ public class AdminSubjectUI {
 			System.out.println("Enter New Subject Name:");
 			sub=scanner.next();
 			subject=new Subject(subId,sub);
-			subjectbl.update(subId, subject);
+			if(subjectbl.update(subId, subject))
+			{
 			System.out.println("One Subject Successfully Updated.");
+			}
+			else
+			{
+				System.out.println("Not Updated.");
+			}
 			break;
 		case 3:
 			System.out.println("Enter The Subject Id You Want To Delete:");
 			subId=scanner.nextInt();
-			subjectbl.delete(subId);
+			if(subjectbl.delete(subId))
+			{
 			System.out.println("One Subject Successfully Deleted.");
+			}
+			else
+			{
+				System.out.println("Not Deleted.Please Try Again.");
+			}
 			break;
 		case 4:
 			System.out.println("Enter The Subject Id You Want To Search:");
@@ -60,7 +78,6 @@ public class AdminSubjectUI {
 			List<Subject> subList=subjectbl.displayAll( );
 			for(Subject s:subList)
 				System.out.println(s);
-			displayMenu();
 			break;
 		case 6:
 			return false;

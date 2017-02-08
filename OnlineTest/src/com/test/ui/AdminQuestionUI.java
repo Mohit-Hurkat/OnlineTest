@@ -15,12 +15,12 @@ public class AdminQuestionUI
 			"\n 2.Update a question" + "\n 3.Delete a Question"+ " \n 4.Search a Question"+
 			"\n 5.Display all Questions"+ "\n 6.Exit";
 	public void displayMenu(){
+		System.out.println();
 		System.out.println(MENU_OPTIONS_QUESTION);
 	}
 	public boolean choice(int choice) throws ClassNotFoundException, IOException, SQLException{
 		Scanner scanner=new Scanner(System.in);		
-		String username;
-		int chaa,subId,ans,questionId;
+		int subId,ans,questionId;
 		String ques,ch1,ch2,ch3,ch4;
 		Question question=null;
 		 int quesId=0;
@@ -29,40 +29,40 @@ public class AdminQuestionUI
 		case 1:
 			quesId+=1;
 			System.out.println("Enter The Subject Id:");
-			subId=scanner.nextInt();
+			subId=Integer.parseInt(scanner.next());
 			System.out.println("Write The Question:");
-			ques=scanner.next();
-			System.out.println("Enter Multiple Choice One:");
-			ch1=scanner.next();
-			System.out.println("Enter Multiple Choice Second:");
-			ch2=scanner.next();
-			System.out.println("Enter Multiple Choice Third:");
-			ch3=scanner.next();
-			System.out.println("Enter Multiple Choice Fourth:");
-			ch4=scanner.next();
+			ques=scanner.nextLine();
+			System.out.println("Enter Choice One:");
+			ch1=scanner.nextLine();
+			System.out.println("Enter Choice Second:");
+			ch2=scanner.nextLine();
+			System.out.println("Enter Choice Third:");
+			ch3=scanner.nextLine();
+			System.out.println("Enter Choice Fourth:");
+			ch4=scanner.nextLine();
 			System.out.println("Enter Answer Of The Question:");
-			ans=scanner.nextInt();
+			ans=Integer.parseInt(scanner.next());
 			 question=new Question(quesId, subId, ques, ans, ch1, ch2, ch3, ch4);
 			questionbl.insert(question);
 			System.out.println("One Question Successfully Inserted.");
 			break;
 		case 2:
-			System.out.println("Enter The Question Id You Want To Update:");
-			questionId=scanner.nextInt();
 			System.out.println("Enter Subject Id:");
-			subId=scanner.nextInt();
+			subId=Integer.parseInt(scanner.next());
+			System.out.println("Enter The Question Id You Want To Update:");
+			questionId=Integer.parseInt(scanner.next());
 			System.out.println("Write The New Question:");
-			ques=scanner.next();
-			System.out.println("Enter New Multiple Choice One:");
-			ch1=scanner.next();
-			System.out.println("Enter New Multiple Choice Second:");
-			ch2=scanner.next();
-			System.out.println("Enter New Multiple Choice Third:");
-			ch3=scanner.next();
-			System.out.println("Enter New Multiple Choice Fourth:");
-			ch4=scanner.next();
+			ques=scanner.nextLine();
+			System.out.println("Enter New Choice One:");
+			ch1=scanner.nextLine();
+			System.out.println("Enter New Choice Second:");
+			ch2=scanner.nextLine();
+			System.out.println("Enter New Choice Third:");
+			ch3=scanner.nextLine();
+			System.out.println("Enter New Choice Fourth:");
+			ch4=scanner.nextLine();
 			System.out.println("Enter New Answer Of The Question:");
-			ans=scanner.nextInt();
+			ans=Integer.parseInt(scanner.next());
 			question=new Question(quesId, subId, ques, ans, ch1, ch2, ch3, ch4);
 			questionbl.update(questionId, question);
 			System.out.println("One Question Successfully Updated.");
@@ -85,7 +85,6 @@ public class AdminQuestionUI
 			List<Question> quesList=questionbl.displayAll(subId);
 			for(Question s:quesList)
 				System.out.println(s);
-			displayMenu();
 			break;
 		case 6:
 			 return false;

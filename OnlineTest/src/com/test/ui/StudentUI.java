@@ -20,9 +20,9 @@ public class StudentUI
 	private TestLogic tbl=new TestLogic();
 	private SubjectLogic sbl=new SubjectLogic();
 	private Student student=null;
-	private static final String STUDENT_MENU_OPTIONS ="1. Update Student Record"+	
-			"\n" + "2. Give Online Test"+	
-			"\n" + "3. Exit"; 
+	private static final String STUDENT_MENU_OPTIONS ="1.Update Student Record"+	
+			"\n" + "2.Give Online Test"+	
+			"\n" + "3.Exit"; 
 	private static final String CHOICE_MSG = "Enter your choice";
 	private static final String FAIL = "Update Failed";
 	private String username;
