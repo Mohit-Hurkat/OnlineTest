@@ -4,9 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
-
-import javax.naming.spi.DirStateFactory.Result;
-
 import java.sql.Connection;
 
 
@@ -23,8 +20,7 @@ public class TestDaoImpl implements TestDao {
 	private static final String Set_Result="INSERT INTO RESULT(USERNAME,SUBJECT_ID,RESULT) VALUES(?,?,?)";
 	private static final String Check_Result="Select * from RESULT WHERE USERNAME=? AND SUBJECT_ID=? ";
 	private boolean flag=false;
-	
-	
+
 	public boolean giveTest(String username,int subjectId) throws ClassNotFoundException, SQLException{
 		Scanner scanner=new Scanner(System.in);
 		 int ans,count=0;

@@ -34,8 +34,7 @@ public class StudentUI
 
 
 
-	public boolean choice(int choice) throws IOException, ClassNotFoundException, SQLException 
-	{	
+	public boolean choice(int choice) throws IOException, ClassNotFoundException, SQLException {	
 		String studentName,pass,phone,email;
 		Scanner sc= new Scanner(System.in);
 		switch(choice)
