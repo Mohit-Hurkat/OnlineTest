@@ -14,23 +14,23 @@ import com.test.helper.JDBCConnection;
 
 public class AdminDaoImpl implements AdminDao{
 	private static final String UPDATE_QUERY = "UPDATE ADMIN SET PASSWORD = ? WHERE USERNAME = ?";
-	private static final String INSERT_QUERY="INSERT INTO ADMIN(USERNAME,PASSWORD) VALUES(?,?)";
+//	private static final String INSERT_QUERY="INSERT INTO ADMIN(USERNAME,PASSWORD) VALUES(?,?)";
 	private static final String DELETE_QUERY = "DELETE FROM ADMIN WHERE USERNAME = ?";
 	private static final String SELECT_QUERY = "SELECT * FROM ADMIN WHERE USERNAME = ?";
 	
-	@Override
-	public boolean insert(Admin admin) throws IOException, ClassNotFoundException, SQLException {
-		int numAffectedRows;
-		Connection connection = JDBCConnection.getConnection();
-		PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY);
-		preparedStatement.setString(1, admin.getUsername());
-		preparedStatement.setString(2, admin.getPassword());
-		numAffectedRows = preparedStatement.executeUpdate();  
-		//System.out.println(numAffectedRows);
-		preparedStatement.close();
-		connection.close();
-		return numAffectedRows > 0;
-	}
+//	@Override
+//	public boolean insert(Admin admin) throws IOException, ClassNotFoundException, SQLException {
+//		int numAffectedRows;
+//		Connection connection = JDBCConnection.getConnection();
+//		PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY);
+//		preparedStatement.setString(1, admin.getUsername());
+//		preparedStatement.setString(2, admin.getPassword());
+//		numAffectedRows = preparedStatement.executeUpdate();  
+//		//System.out.println(numAffectedRows);
+//		preparedStatement.close();
+//		connection.close();
+//		return numAffectedRows > 0;
+//	}
 	
 	@Override
 	public boolean update(String username,String password) throws IOException, ClassNotFoundException, SQLException {
@@ -44,29 +44,29 @@ public class AdminDaoImpl implements AdminDao{
 		return true;
 	}
 	
-	@Override
-	public boolean delete(String admin,String username) throws IOException, ClassNotFoundException, SQLException {
-		String adm="admin";
-		if(admin.equals(adm)){
-			if(username.equals(adm))
-			{	
-				System.out.println("Can't Delete The System Admin.");
-				return false;
-			}
-				int updateCount;
-				Connection connection = JDBCConnection.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
-			preparedStatement.setString(1, username);
-			preparedStatement.execute();
-			updateCount = preparedStatement.getUpdateCount();
-			preparedStatement.close();
-			connection.close();
-			return updateCount > 0;
-			}
-		System.out.println("Unauthorized Access.");
-		return false;
-	}
-	
+//	@Override
+//	public boolean delete(String admin,String username) throws IOException, ClassNotFoundException, SQLException {
+//		String adm="admin";
+//		if(admin.equals(adm)){
+//			if(username.equals(adm))
+//			{	
+//				System.out.println("Can't Delete The System Admin.");
+//				return false;
+//			}
+//				int updateCount;
+//				Connection connection = JDBCConnection.getConnection();
+//				PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
+//			preparedStatement.setString(1, username);
+//			preparedStatement.execute();
+//			updateCount = preparedStatement.getUpdateCount();
+//			preparedStatement.close();
+//			connection.close();
+//			return updateCount > 0;
+//			}
+//		System.out.println("Unauthorized Access.");
+//		return false;
+//	}
+//	
 //	public Admin retrieveAdminRecord() throws IOException, ClassNotFoundException, SQLException{
 //		Admin admin=new Admin("admin", null);
 //		//List<Customer> cList = new ArrayList<>();

@@ -110,6 +110,7 @@ public class QuestionDaoImpl implements QuestionDao{
 		preparedStatement.setString(6, question.getChoice4());
 		preparedStatement.setInt(7, question.getAnswer());
 		preparedStatement.setInt(8, questionId);
+		preparedStatement.executeQuery();
 		preparedStatement.close();
 		connection.close();
 		return true;

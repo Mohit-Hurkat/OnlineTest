@@ -20,12 +20,12 @@ public class AdminLogic {
 //	public Admin retrieveAdminRecord() throws IOException, ClassNotFoundException, SQLException {
 //		return adminDao.retrieveAdminRecord();
 //	}
-	public boolean insert(Admin admin)throws IOException, ClassNotFoundException, SQLException{
-		return adminDao.insert(admin);
-	}
-	public boolean delete(String admin,String username) throws IOException, ClassNotFoundException, SQLException{
-		return adminDao.delete(admin,username);
-	}
+//	public boolean insert(Admin admin)throws IOException, ClassNotFoundException, SQLException{
+//		return adminDao.insert(admin);
+//	}
+//	public boolean delete(String admin,String username) throws IOException, ClassNotFoundException, SQLException{
+//		return adminDao.delete(admin,username);
+//	}
 	public Admin search(String username) throws IOException, ClassNotFoundException, SQLException{
 		return adminDao.search(username);
 	}

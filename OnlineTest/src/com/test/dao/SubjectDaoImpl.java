@@ -90,6 +90,7 @@ public class SubjectDaoImpl implements SubjectDao {
 		PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
 		preparedStatement.setString(1, subject.getSubject());
 		preparedStatement.setInt(2, subjectId);
+		preparedStatement.executeQuery();
 		preparedStatement.close();
 		connection.close();
 		return true;
@@ -101,8 +102,7 @@ public class SubjectDaoImpl implements SubjectDao {
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
 		preparedStatement.setInt(1, subjectId);
-		preparedStatement.execute();
-		updateCount = preparedStatement.getUpdateCount();
+		updateCount=preparedStatement.executeUpdate();
 		preparedStatement.close();
 		connection.close();
 		return updateCount > 0;

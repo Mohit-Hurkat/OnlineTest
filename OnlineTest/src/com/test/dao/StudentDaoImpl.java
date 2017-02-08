@@ -86,6 +86,7 @@ public class StudentDaoImpl implements StudentDao{
 		preparedStatement.setString(3, newStudent.getPhone());
 		preparedStatement.setString(4, newStudent.getEmail());
 		preparedStatement.setString(5, username);
+		preparedStatement.executeQuery();
 		preparedStatement.close();
 		connection.close();
 		return true;
