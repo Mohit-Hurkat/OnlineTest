@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.sql.Connection;
 
 
@@ -20,9 +22,10 @@ public class TestDaoImpl implements TestDao {
 	private static final String Set_Result="INSERT INTO RESULT(USERNAME,SUBJECT_ID,RESULT) VALUES(?,?,?)";
 	private static final String Check_Result="Select * from RESULT WHERE USERNAME=? AND SUBJECT_ID=? ";
 	private boolean flag=false;
-
+	
 	public boolean giveTest(String username,int subjectId) throws ClassNotFoundException, SQLException{
 		Scanner scanner=new Scanner(System.in);
+		 Timer timer = new Timer();
 		 int ans,count=0;
 		 int numAffectedRows;
 		 Connection connection = JDBCConnection.getConnection();
@@ -44,6 +47,7 @@ public class TestDaoImpl implements TestDao {
 		ResultSet rs = preparedStatement1.executeQuery();
 		PreparedStatement preparedStatement2 = connection.prepareStatement(Set_Value1);
 			while(rs.next()){
+				long endTime = System.currentTimeMillis() + 15000;
 				int questionid = rs.getInt(1);
 				String question=rs.getString(3);
 				String choice1=rs.getString(4);
@@ -53,18 +57,16 @@ public class TestDaoImpl implements TestDao {
 				int answer=rs.getInt(8);
 				System.out.println("Question: "+question+"\n 1. "+
 				choice1+"\n 2. "+choice2+"\n 3. "+choice3+"\n 4. "+choice4 );
-				do{
 				System.out.println("Enter Your Answer Number");
 				ans=scanner.nextInt();
 				if(ans>4||ans<1){
 					System.out.println("Invalid Choice");
-					flag=false;
 				} 
-				else{
-					flag=true;
-				}
-				}while(flag==false);
-				if(ans==answer){
+				else if (System.currentTimeMillis() > endTime){
+					System.out.println("Time Exceeded");
+					ans=0;
+				}				
+				else if(ans==answer){
 					count++;					
 				}
 				preparedStatement2.setInt(1,questionid);

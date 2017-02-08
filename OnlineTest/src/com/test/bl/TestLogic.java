@@ -10,6 +10,7 @@ public class TestLogic {
 	
 	public boolean giveTest(String username,int sujectId) throws ClassNotFoundException, SQLException{
 		return tdao.giveTest(username, sujectId);
-	}
 	
+	}
+
 }
