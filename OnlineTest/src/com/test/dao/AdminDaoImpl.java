@@ -17,7 +17,6 @@ public class AdminDaoImpl implements AdminDao{
 	private static final String DELETE_QUERY = "DELETE FROM ADMIN WHERE USERNAME = ?";
 	private static final String SELECT_QUERY = "SELECT * FROM ADMIN WHERE USERNAME = ?";
 	
- 
 	@Override
 	public boolean update(String username,String password) throws IOException, ClassNotFoundException, SQLException {
 		int numAffectedRows=0;
