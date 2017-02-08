@@ -71,7 +71,7 @@ public class StudentUI
 			else
 			{
 				System.out.println("Invalid Subject");
-				return false;
+				return true;
 			}
 			int result=tbl.result(username, subjectId);
 			result=result*25;

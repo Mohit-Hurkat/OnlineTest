@@ -9,7 +9,7 @@ public class QuestionData {
 
 	Question question;
 	private String question1,choice1,choice2,choice3,choice4;
-	private int subjectId,answer;
+	private int subjectId,answer,QuestionId;
 	Scanner scanner=new Scanner(System.in);
 	
 	public Question input(){
@@ -35,8 +35,10 @@ public class QuestionData {
 	public Question update(){
 		try {
 			System.out.println("Enter New Details :\n");
-			System.out.println("Enter The Subject Id:");
+			System.out.println("Enter Subject ID");
 			subjectId=Integer.parseInt(scanner.nextLine());
+			System.out.println("Enter The QuestionId You Want to Update:");
+			QuestionId=Integer.parseInt(scanner.nextLine());
 			System.out.println("Write New Question:");
 			question1=scanner.nextLine();
 			System.out.println("Enter Option 1:");
@@ -49,7 +51,7 @@ public class QuestionData {
 			choice4=scanner.nextLine();
 			System.out.println("Enter Answer Of The Question:");
 			answer=scanner.nextInt();
-			 question=new Question(0,subjectId, question1, answer, choice1, choice2, choice3, choice4);
+			 question=new Question(QuestionId,subjectId, question1, answer, choice1, choice2, choice3, choice4);
 			 return question;
 		} catch (Exception e) {
 			System.out.println("Enter Appropriate Information");

@@ -23,7 +23,7 @@ public class AdminQuestionUI
 	}
 	public boolean choice(int choice) throws ClassNotFoundException, IOException, SQLException{
 		Scanner scanner=new Scanner(System.in);		
-		int subId,ans,questionId;
+		int subId=0,ans,questionId;
 		String ques,ch1,ch2,ch3,ch4;
 		Question question=null;
 		 int quesId=0;

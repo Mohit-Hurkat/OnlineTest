@@ -13,7 +13,7 @@ import com.test.helper.JDBCConnection;
 
 public class QuestionDaoImpl implements QuestionDao{
 	private static final String UPDATE_QUERY = "UPDATE QUESTIONS SET SUBJECT_ID = ?, QUESTION = ?," + 
-			"CHOICE1 = ?, CHOICE2 = ?, CHOICE3 = ?, CHOICE4 = ?, ANSWER = ? WHERE QUESTION_ID = ?";
+			"CHOICE1 = ?, CHOICE2 = ?, CHOICE3 = ?, CHOICE4 = ?, ANSWER = ?, VALUE = ? WHERE QUESTION_ID = ?";
 	private static final String DELETE_QUERY = "DELETE FROM QUESTIONS WHERE QUESTION_ID = ?";
 	private static final String SELECT_ALL_QUERY = "SELECT * FROM QUESTIONS WHERE SUBJECT_ID= ?";	
 	private static final String SELECT_QUERY = "SELECT * FROM QUESTIONS WHERE QUESTION_ID = ?";
@@ -111,7 +111,8 @@ public class QuestionDaoImpl implements QuestionDao{
 		preparedStatement.setString(5, question.getChoice3());
 		preparedStatement.setString(6, question.getChoice4());
 		preparedStatement.setInt(7, question.getAnswer());
-		preparedStatement.setInt(8, questionId);
+		preparedStatement.setInt(8,0);
+		preparedStatement.setInt(9, questionId);
 		preparedStatement.executeQuery();
 		preparedStatement.close();
 		connection.close();
