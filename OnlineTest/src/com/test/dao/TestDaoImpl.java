@@ -82,4 +82,18 @@ public class TestDaoImpl implements TestDao {
 			connection.close();
 			return numAffectedRows > 0;
 	}
+	
+	public int result(String username,int subjectId) throws ClassNotFoundException, SQLException{
+		int res=0;
+		Connection connection = JDBCConnection.getConnection();
+		PreparedStatement preparedStatement = connection.prepareStatement(Check_Result);
+		preparedStatement.setString(1,username);
+		preparedStatement.setInt(2,subjectId);
+		ResultSet rs1=preparedStatement.executeQuery();
+		while(rs1.next()){
+			res=rs1.getInt(3);
+		}
+		return res;
+	}
+	
 }

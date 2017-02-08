@@ -12,5 +12,8 @@ public class TestLogic {
 		return tdao.giveTest(username, sujectId);
 	
 	}
+	 public int result(String username,int subjectId) throws ClassNotFoundException, SQLException{
+		 return  tdao.result(username, subjectId);
+	 }
 
 }

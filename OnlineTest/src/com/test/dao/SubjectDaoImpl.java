@@ -12,12 +12,12 @@ import com.test.bean.Subject;
 import com.test.helper.JDBCConnection;
 
 public class SubjectDaoImpl implements SubjectDao {
-	private static final String INSERT_QUERY="INSERT INTO SUBJECT(subjectId,subjectName) VALUES(?,?)";
-	private static final String GET_MAX_ID_QUERY = "SELECT COALESCE(MAX(subjectId), 0) AS COUNT FROM SUJBECT";
-	private static final String SELECT_QUERY = "SELECT * FROM SUBJECT WHERE subjectId = ?";   
+	private static final String INSERT_QUERY="INSERT INTO SUBJECT(SUBJECT_ID,SUBJECT_NAME) VALUES(?,?)";
+	private static final String GET_MAX_ID_QUERY = "SELECT COALESCE(MAX(SUBJECT_ID), 0) AS COUNT FROM SUJBECT";
+	private static final String SELECT_QUERY = "SELECT * FROM SUBJECT WHERE SUBJECT_ID = ?";   
 	private static final String SELECT_ALL_QUERY = "SELECT * FROM SUBJECT";
-	private static final String UPDATE_QUERY = "UPDATE SUBJECT SET SUBJECT = ? WHERE subjectId = ?";
-	private static final String DELETE_QUERY = "DELETE FROM SUBJECT WHERE subjectId = ?";
+	private static final String UPDATE_QUERY = "UPDATE SUBJECT SET SUBJECT_NAME = ? WHERE SUBJECT_ID = ?";
+	private static final String DELETE_QUERY = "DELETE FROM SUBJECT WHERE SUBJECT_ID = ?";
 	
 	@Override
 	public boolean insert(Subject subject) throws IOException, ClassNotFoundException, SQLException {
@@ -56,7 +56,7 @@ public class SubjectDaoImpl implements SubjectDao {
 		preparedStatement.setInt(1, subjectId);
 		ResultSet rs = preparedStatement.executeQuery();
 		if(rs.next()){
-			String subject1 = rs.getString("SUBJECT");
+			String subject1 = rs.getString("SUBJECT_NAME");
 			subject = new Subject(subjectId, subject1 );
 			subjectList.add(subject);
 		}
@@ -68,15 +68,13 @@ public class SubjectDaoImpl implements SubjectDao {
 
 	@Override
 	public List<Subject> displayAll() throws IOException, ClassNotFoundException, SQLException {
-		Subject subject = null;
 		List<Subject> subjectList = new ArrayList<>();
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_QUERY);
-		preparedStatement.setString(1, subject.getSubject());
 		ResultSet rs = preparedStatement.executeQuery();
 		while(rs.next()){
 			int subjectId = rs.getInt("SUBJECT_ID");
-			String subjectName = rs.getString("SUBJECT");
+			String subjectName = rs.getString("SUBJECT_NAME");
 			Subject subOb = new Subject(subjectId, subjectName);
 			subjectList.add(subOb);
 		}

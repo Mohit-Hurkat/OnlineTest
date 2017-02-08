@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.test.bean.Student;
+import com.test.bean.Subject;
+import com.test.bl.SubjectLogic;
 import com.test.bl.TestLogic;
 import com.test.dao.StudentDaoImpl;
+import com.test.helper.StudentData;
 
  
 
@@ -15,11 +18,13 @@ public class StudentUI
 {
 	private StudentDaoImpl studentDao=new StudentDaoImpl();
 	private TestLogic tbl=new TestLogic();
+	private SubjectLogic sbl=new SubjectLogic();
 	private Student student=null;
 	private static final String STUDENT_MENU_OPTIONS ="1. Update Student Record"+	
 			"\n" + "2. Give Online Test"+	
 			"\n" + "3. Exit"; 
 	private static final String CHOICE_MSG = "Enter your choice";
+	private static final String FAIL = "Update Failed";
 	private String username;
 	public void displayMenu()
 	{
@@ -35,31 +40,33 @@ public class StudentUI
 
 
 	public boolean choice(int choice) throws IOException, ClassNotFoundException, SQLException {	
-		String studentName,pass,phone,email;
-		Scanner sc= new Scanner(System.in);
+
 		switch(choice)
 		{
 		
 		case 1:
-			 System.out.println("Enter New Details :\n");
-			 System.out.println("Enter New Student Name:");
-			 studentName=sc.next();
-			 System.out.println("Enter New Password:");
-			 pass=sc.next();
-			 System.out.println("Enter New Phone Number:");
-			 phone=sc.next();
-			 System.out.println("Enter New E-Mail Id:");
-			 email=sc.next();
-			 
-			 student=new Student(username,pass,studentName, phone, email);
+			StudentData studentD=new StudentData();
+			student=studentD.update();
+			if(student!=null)
 			 studentDao.update(username, student);
+			else{
+				System.out.println(FAIL);
+			}
 			 
 			break;
 		
 		case 2:
-			 System.out.println("Enter Subject-Id");
-			 int subjectId=sc.nextInt();
-			 tbl.giveTest(username, subjectId);
+			Scanner sc= new Scanner(System.in);
+				List<Subject> subList=sbl.displayAll();
+				for(Subject sub:subList){
+				System.out.println(sub);
+				}
+			System.out.println("Enter Subject-Id");
+			int subjectId=sc.nextInt();
+			tbl.giveTest(username, subjectId);
+			int result=tbl.result(username, subjectId);
+			result=result*25;
+			System.out.println("Your Score Percentage: "+result+"%");
 			break;
 		
 
