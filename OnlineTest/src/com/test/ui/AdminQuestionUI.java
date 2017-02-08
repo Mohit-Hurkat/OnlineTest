@@ -7,6 +7,7 @@ import java.util.Scanner;
 import com.test.bean.Question;
 import com.test.bean.Subject;
 import com.test.bl.QuestionLogic;
+import com.test.helper.QuestionData;
 
 public class AdminQuestionUI 
 {
@@ -14,6 +15,8 @@ public class AdminQuestionUI
 	private static final String MENU_OPTIONS_QUESTION = "1.Insert a question" +
 			"\n2.Update a question" + "\n3.Delete a Question"+ " \n4.Search a Question"+
 			"\n5.Display all Questions"+ "\n6.Exit";
+	private QuestionData qd=new QuestionData();
+	
 	public void displayMenu(){
 		System.out.println();
 		System.out.println(MENU_OPTIONS_QUESTION);
@@ -27,22 +30,7 @@ public class AdminQuestionUI
 		switch(choice)
 		{
 		case 1:
-			quesId+=1;
-			System.out.println("Enter The Subject Id:");
-			subId=Integer.parseInt(scanner.next());
-			System.out.println("Write The Question:");
-			ques=scanner.nextLine();
-			System.out.println("Enter Choice One:");
-			ch1=scanner.nextLine();
-			System.out.println("Enter Choice Second:");
-			ch2=scanner.nextLine();
-			System.out.println("Enter Choice Third:");
-			ch3=scanner.nextLine();
-			System.out.println("Enter Choice Fourth:");
-			ch4=scanner.nextLine();
-			System.out.println("Enter Answer Of The Question:");
-			ans=Integer.parseInt(scanner.next());
-			 question=new Question(quesId, subId, ques, ans, ch1, ch2, ch3, ch4);
+			question=qd.input();
 			questionbl.insert(question);
 			System.out.println("One Question Successfully Inserted.");
 			break;

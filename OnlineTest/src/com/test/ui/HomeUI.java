@@ -91,9 +91,17 @@ public class HomeUI {
 							}
 					}
 			}
+			catch(ClassNotFoundException cnfe){
+				System.out.println(cnfe);
+				cnfe.printStackTrace();
+			} catch (IOException e) {
+				System.out.println(e);
+			} catch (SQLException e) {
+				System.out.println(e);
+			}
 			catch(Exception e)
 			{
-				System.out.println(AUTH_FAILED_MSG+"\n");
+				System.out.println("Error. Please Login Again");
 			}
 			break;
 		case 3:

@@ -4,15 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
-import java.util.Timer;
 import java.sql.Connection;
-
-
-import com.test.bl.QuestionLogic;
 import com.test.helper.JDBCConnection;
 
 public class TestDaoImpl implements TestDao {
-	private QuestionLogic questionbl=new QuestionLogic();
 	private static final String Set_Value="update QUESTIONS SET VALUE = 0";
 	private static final String Call_Question="select * FROM ( "+
 			"select * FROM QUESTIONS ORDER BY DBMS_RANDOM.RANDOM)"+
@@ -20,15 +15,27 @@ public class TestDaoImpl implements TestDao {
 	private static final String Set_Value1="update QUESTIONS SET VALUE = 1 where QUESTION_ID = ?";
 	private static final String Set_Result="INSERT INTO RESULT(USERNAME,SUBJECT_ID,RESULT) VALUES(?,?,?)";
 	private static final String Check_Result="Select * from RESULT WHERE USERNAME=? AND SUBJECT_ID=? ";
+	private static final String Check_Questions="Select COUNT(*) from QUESTIONS WHERE SUBJECT_ID=? ";
 	private boolean flag=false;
 	
 	public boolean giveTest(String username,int subjectId) throws ClassNotFoundException, SQLException{
 		Scanner scanner=new Scanner(System.in);
-		 Timer timer = new Timer();
-		 int ans,count=0;
+		 int res3 = 0,ans,count=0;
 		 int numAffectedRows;
-		 Connection connection = JDBCConnection.getConnection();
-		PreparedStatement preparedStatement = connection.prepareStatement(Check_Result);
+		Connection connection = JDBCConnection.getConnection();
+		PreparedStatement preparedStatement = connection.prepareStatement(Check_Questions);
+		preparedStatement.setInt(1,subjectId);
+		ResultSet res2=preparedStatement.executeQuery();
+		while(res2.next()){
+		res3=res2.getInt(1);
+		}
+		preparedStatement.close();
+		if (res3<10){
+			System.out.println("Questions Yet To Be Updated.Please Select Another Subject.");
+			connection.close();
+			return false;
+		}
+		preparedStatement = connection.prepareStatement(Check_Result);
 		preparedStatement.setString(1,username);
 		preparedStatement.setInt(2,subjectId);
 		ResultSet rs1=preparedStatement.executeQuery();
