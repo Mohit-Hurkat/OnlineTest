@@ -42,7 +42,9 @@ public class QuestionDaoImpl implements QuestionDao{
 		preparedStatement.setString(6, question.getChoice3());
 		preparedStatement.setString(7, question.getChoice4());
 		preparedStatement.setInt(8, question.getAnswer());
-		numAffectedRows = preparedStatement.executeUpdate();  
+		numAffectedRows = preparedStatement.executeUpdate();
+		preparedStatement.close();
+		connection.close();
 		//System.out.println(numAffectedRows);
 		return numAffectedRows > 0;
 	}

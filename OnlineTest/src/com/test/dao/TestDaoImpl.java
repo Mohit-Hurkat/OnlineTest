@@ -64,6 +64,10 @@ public class TestDaoImpl implements TestDao {
 			preparedStatement3.setInt(2, subjectId);
 			preparedStatement3.setInt(3, count);
 			numAffectedRows = preparedStatement3.executeUpdate();
+			preparedStatement.close();
+			preparedStatement1.close();
+			preparedStatement2.close();
+			connection.close();
 			return numAffectedRows > 0;
 	}
 }

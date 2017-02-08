@@ -37,6 +37,8 @@ public class StudentDaoImpl implements StudentDao{
 		preparedStatement.setString(5, student.getEmail());
 		numAffectedRows = preparedStatement.executeUpdate();  
 //		System.out.println(numAffectedRows);
+		preparedStatement.close();
+		connection.close();
 		return numAffectedRows > 0;
 	}
 
@@ -57,6 +59,8 @@ public class StudentDaoImpl implements StudentDao{
 			System.out.println(student);
 			studentList.add(student);
 			}
+		preparedStatement.close();
+		connection.close();
 		return student;
 	}
 
@@ -74,6 +78,8 @@ public class StudentDaoImpl implements StudentDao{
 			Student student = new Student(StudentUsername,"********",StudentName,StudentPhone, StudentEmail);
 			studentList.add(student);
 		}
+		preparedStatement.close();
+		connection.close();
 		return studentList;
 	}
 

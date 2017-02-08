@@ -29,6 +29,8 @@ public class SubjectDaoImpl implements SubjectDao {
 		preparedStatement.setString(2, subject.getSubject());
 		numAffectedRows = preparedStatement.executeUpdate();  
 		//System.out.println(numAffectedRows);
+		preparedStatement.close();
+		connection.close();
 		return numAffectedRows > 0;
 		
 	}
@@ -59,7 +61,7 @@ public class SubjectDaoImpl implements SubjectDao {
 			subjectList.add(subject);
 		}
 		rs.close();
-		preparedStatement.close();
+		preparedStatement.close();  
 		connection.close();
 		return subject;
 	}
