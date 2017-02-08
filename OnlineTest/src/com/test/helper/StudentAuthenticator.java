@@ -13,11 +13,11 @@ public class StudentAuthenticator {
 	
 	public Map.Entry<Student, Boolean> authenticate(String username, String password) throws ClassNotFoundException, IOException, SQLException{
 		StudentDao cdao = new StudentDaoImpl();
-		Student Student = cdao.search(username);
-		if(Student == null)
+		Student student = cdao.search(username);
+		if(student == null)
 			return new AbstractMap.SimpleEntry<>(null, false);
-		if(password.equals(Student.getPassword()))
-			return new AbstractMap.SimpleEntry<>(Student, true);
-		return new AbstractMap.SimpleEntry<>(Student, false);
+		if(password.equals(student.getPassword()))
+			return new AbstractMap.SimpleEntry<>(student, true);
+		return new AbstractMap.SimpleEntry<>(student, false);
 	}
 }

@@ -20,14 +20,23 @@ public class StudentUI
 			"\n" + "2. Give Online Test"+	
 			"\n" + "3. Exit"; 
 	private static final String CHOICE_MSG = "Enter your choice";
+	private String username;
 	public void displayMenu()
 	{
 		System.out.println(STUDENT_MENU_OPTIONS);
 	}
 	
+	
+	public StudentUI(String username) {
+		super();
+		this.username = username;
+	}
+
+
+
 	public boolean choice(int choice) throws IOException, ClassNotFoundException, SQLException 
 	{	
-		String username,studentName,pass,phone,email;
+		String studentName,pass,phone,email;
 		Scanner sc= new Scanner(System.in);
 		switch(choice)
 		{
@@ -51,8 +60,6 @@ public class StudentUI
 			break;
 		
 		case 2:
-			System.out.println("Enter Username");
-			username=sc.next();
 			 System.out.println("Enter Subject-Id");
 			 int subjectId=sc.nextInt();
 			 tbl.giveTest(username, subjectId);

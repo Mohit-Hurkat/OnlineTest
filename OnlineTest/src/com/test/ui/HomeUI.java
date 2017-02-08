@@ -77,7 +77,7 @@ public class HomeUI {
 	else{
 		Map.Entry<Student, Boolean> result =ca.authenticate(username, password);
 			if(result.getValue() != false){
-			StudentUI StudentUI = new StudentUI();
+			StudentUI StudentUI = new StudentUI(username);
 			do {
 				StudentUI.displayMenu();
 				System.out.print(CHOICE_MSG + ": ");
