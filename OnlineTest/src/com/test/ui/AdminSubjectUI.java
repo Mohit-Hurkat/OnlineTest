@@ -26,13 +26,9 @@ public class AdminSubjectUI {
 		switch(choice)
 		{
 		case 1:
-			 
-			System.out.println("Enter The Subject Id:");
-			subId=scanner.nextInt();
 			System.out.println("Enter Subject Name:");
 			sub=scanner.next();
-			subject=new Subject(subId,sub);
-			if(subjectbl.insert(subject))
+			if(subjectbl.insert(sub))
 			{
 				System.out.println("One Subject Successfully Inserted.");
 			}
