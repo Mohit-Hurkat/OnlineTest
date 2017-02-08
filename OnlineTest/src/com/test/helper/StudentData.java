@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import com.test.bean.Student;
 public class StudentData {
-private Student student;
+	private Student student;
 	
 	public void input(){
 		Scanner sc=new Scanner(System.in);
@@ -18,7 +18,8 @@ private Student student;
 		String phone=sc.next();
 		System.out.println("Enter Email : ");
 		String email=sc.next();
-		Student student=new Student(username,password,name,phone,email);
+		student=new Student(username,password,name,phone,email);
+		
 	}
 
 	public Student getStudent() {

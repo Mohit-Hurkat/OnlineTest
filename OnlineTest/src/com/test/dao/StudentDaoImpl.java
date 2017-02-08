@@ -19,18 +19,24 @@ public class StudentDaoImpl implements StudentDao{
 	private static final String SELECT_ALL_QUERY = "SELECT * FROM STUDENT";	
 	private static final String SELECT_QUERY = "SELECT * FROM STUDENT WHERE USERNAME = ?";
     private static final String INSERT_QUERY="INSERT INTO STUDENT(USERNAME,PASSWORD,NAME,PHONE,EMAIL) VALUES(?,?,?,?,?)";
-	@Override
+	
+    @Override
 	public boolean insert(Student student) throws IOException, ClassNotFoundException, SQLException{
-		int numAffectedRows;
+		int numAffectedRows=0;
+		System.out.println(student);
+		if(student.getUsername().equals("admin"))
+		{
+			return false;
+		}
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY);
 		preparedStatement.setString(1, student.getUsername());
 		preparedStatement.setString(2, student.getPassword());
 		preparedStatement.setString(3, student.getName());
 		preparedStatement.setString(4, student.getPhone());
-		preparedStatement.setString(4, student.getEmail());
+		preparedStatement.setString(5, student.getEmail());
 		numAffectedRows = preparedStatement.executeUpdate();  
-		//System.out.println(numAffectedRows);
+//		System.out.println(numAffectedRows);
 		return numAffectedRows > 0;
 	}
 
@@ -44,11 +50,13 @@ public class StudentDaoImpl implements StudentDao{
 		ResultSet rs = preparedStatement.executeQuery();
 		if(rs.next()){    //ask why next
 			String StudentName = rs.getString("NAME");
+			String password= rs.getString("PASSWORD");
 			String StudentPhone = rs.getString("PHONE");
 			String StudentEmail = rs.getString("Email");
-			student = new Student(username,"********",StudentName,StudentPhone, StudentEmail);
+			student = new Student(username,password,StudentName,StudentPhone, StudentEmail);
+			System.out.println(student);
 			studentList.add(student);
-		}
+			}
 		return student;
 	}
 

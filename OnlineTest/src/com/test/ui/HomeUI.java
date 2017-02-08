@@ -58,9 +58,9 @@ public class HomeUI {
 			System.out.println(PASSWORD_PROMPT + ": ");
 			String password = scanner.next();
 			boolean truthVal1 = false;
-			Admin admin=adminbl.retrieveAdminRecord();
-			if(username.equals(admin.getUsername())){
-				Map.Entry<Admin, Boolean> result =aa.authenticate(username, password);
+				Admin admin=adminbl.retrieveAdminRecord();
+					if(username.equals(admin.getUsername())){
+						Map.Entry<Admin, Boolean> result =aa.authenticate(username, password);
 						if(result.getValue() != false){
 							AdminUI adminUI = new AdminUI();
 							do{
@@ -79,7 +79,7 @@ public class HomeUI {
 			if(result.getValue() != false){
 			StudentUI StudentUI = new StudentUI();
 			do {
-				StudentUI.displayMenu(username);
+				StudentUI.displayMenu();
 				System.out.print(CHOICE_MSG + ": ");
 				truthVal1 = StudentUI.choice(scanner.nextInt());
 			} while(truthVal1);

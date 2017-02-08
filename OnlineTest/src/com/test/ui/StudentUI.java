@@ -20,9 +20,8 @@ public class StudentUI
 			"\n" + "2. Give Online Test"+	
 			"\n" + "3. Exit"; 
 	private static final String CHOICE_MSG = "Enter your choice";
-	public void displayMenu(String username)
+	public void displayMenu()
 	{
-		student.setUsername(username);
 		System.out.println(STUDENT_MENU_OPTIONS);
 	}
 	
@@ -52,9 +51,11 @@ public class StudentUI
 			break;
 		
 		case 2:
+			System.out.println("Enter Username");
+			username=sc.next();
 			 System.out.println("Enter Subject-Id");
 			 int subjectId=sc.nextInt();
-			 tbl.giveTest(student.getUsername(), subjectId);
+			 tbl.giveTest(username, subjectId);
 			break;
 		
 
@@ -64,7 +65,7 @@ public class StudentUI
 		
 		default:
 			System.out.println("Invalid choice");
-			displayMenu(student.getUsername());
+			displayMenu();
 		}
 		
 		return true;
