@@ -4,6 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+
+import javax.naming.spi.DirStateFactory.Result;
+
 import java.sql.Connection;
 
 
@@ -18,6 +21,7 @@ public class TestDaoImpl implements TestDao {
 			"WHERE rownum <=4 AND SUBJECT_ID = ? AND VALUE = 0";
 	private static final String Set_Value1="update QUESTIONS SET VALUE = 1 where QUESTION_ID = ?";
 	private static final String Set_Result="INSERT INTO RESULT(USERNAME,SUBJECT_ID,RESULT) VALUES(?,?,?)";
+	private static final String Check_Result="Select * from RESULT WHERE USERNAME=? AND SUBJECT_ID=? ";
 	private boolean flag=false;
 	
 	
@@ -25,8 +29,19 @@ public class TestDaoImpl implements TestDao {
 		Scanner scanner=new Scanner(System.in);
 		 int ans,count=0;
 		 int numAffectedRows;
-		Connection connection = JDBCConnection.getConnection();
-		PreparedStatement preparedStatement = connection.prepareStatement(Set_Value);
+		 Connection connection = JDBCConnection.getConnection();
+		PreparedStatement preparedStatement = connection.prepareStatement(Check_Result);
+		preparedStatement.setString(1,username);
+		preparedStatement.setInt(2,subjectId);
+		ResultSet rs1=preparedStatement.executeQuery();
+		if(rs1.next()){
+			System.out.println("Test Already Given");
+			preparedStatement.close();
+			connection.close();
+			return false;
+		}
+		preparedStatement.close();
+		preparedStatement = connection.prepareStatement(Set_Value);
 		preparedStatement.executeUpdate();
 		PreparedStatement preparedStatement1 = connection.prepareStatement(Call_Question);
 		preparedStatement1.setInt(1,subjectId);
