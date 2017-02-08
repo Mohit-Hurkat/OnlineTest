@@ -36,7 +36,7 @@ public class Student extends User{
 
 	@Override
 	public String toString() {
-		return "Student [getUsername()=" + getUsername() + ", name=" + name + ", phone=" + phone + ", email=" + email
+		return "Student [UserName=" + getUsername() + ", Name=" + name + ", Phone No =" + phone + ", Email=" + email
 				+ "]";
 	}
 	

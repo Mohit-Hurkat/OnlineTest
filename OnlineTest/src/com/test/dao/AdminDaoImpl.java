@@ -85,7 +85,7 @@ public class AdminDaoImpl implements AdminDao{
 
 	@Override
 	public Admin search(String username)throws IOException,ClassNotFoundException, SQLException {
-		Admin admin=null;
+		Admin admin=new Admin("","");
 		List<Admin> adminList = new ArrayList<>();
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_QUERY);
