@@ -12,8 +12,8 @@ public class AdminQuestionUI
 {
 	private QuestionLogic questionbl=new QuestionLogic();
 	private static final String MENU_OPTIONS_QUESTION = "1.Insert a question" +
-			"\n 2.Update a question" + "\n 3.Delete a Question"+ " \n 4.Search a Question"+
-			"\n 5.Display all Questions"+ "\n 6.Exit";
+			"\n2.Update a question" + "\n3.Delete a Question"+ " \n4.Search a Question"+
+			"\n5.Display all Questions"+ "\n6.Exit";
 	public void displayMenu(){
 		System.out.println();
 		System.out.println(MENU_OPTIONS_QUESTION);

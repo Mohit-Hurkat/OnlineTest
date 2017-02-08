@@ -57,6 +57,8 @@ public class HomeUI {
 			String username = scanner.next();
 			System.out.println(PASSWORD_PROMPT + ": ");
 			String password = scanner.next();
+			try
+			{
 			boolean truthVal1 = false;
 				Admin admin=adminbl.search(username);
 					if(username.equals(admin.getUsername())){
@@ -73,21 +75,26 @@ public class HomeUI {
 							System.out.println(AUTH_FAILED_MSG);
 						}
 		
+						}
+					else{
+							Map.Entry<Student, Boolean> result =ca.authenticate(username, password);
+							if(result.getValue() != false){
+								StudentUI StudentUI = new StudentUI(username);
+								do {
+									StudentUI.displayMenu();
+									System.out.print(CHOICE_MSG + ": ");
+									truthVal1 = StudentUI.choice(scanner.nextInt());
+								} while(truthVal1);
+							}
+							else{
+								System.out.println(AUTH_FAILED_MSG);
+							}
+					}
 			}
-	else{
-		Map.Entry<Student, Boolean> result =ca.authenticate(username, password);
-			if(result.getValue() != false){
-			StudentUI StudentUI = new StudentUI(username);
-			do {
-				StudentUI.displayMenu();
-				System.out.print(CHOICE_MSG + ": ");
-				truthVal1 = StudentUI.choice(scanner.nextInt());
-			} while(truthVal1);
-		}
-		else{
-			System.out.println(AUTH_FAILED_MSG);
-		}
-	}
+			catch(Exception e)
+			{
+				System.out.println(AUTH_FAILED_MSG+"\n");
+			}
 			break;
 		case 3:
 			System.out.println(EXIT_MSG);
