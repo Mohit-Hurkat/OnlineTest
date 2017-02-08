@@ -20,14 +20,15 @@ public class AdminDaoImpl implements AdminDao{
  
 	@Override
 	public boolean update(String username,String password) throws IOException, ClassNotFoundException, SQLException {
+		int numAffectedRows=0;
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
 		preparedStatement.setString(1, password);
 		preparedStatement.setString(2, username);
-		preparedStatement.executeQuery();
+		numAffectedRows=preparedStatement.executeUpdate();
 		preparedStatement.close();
 		connection.close();
-		return true;
+		return numAffectedRows > 0;
 	}
  
 	@Override

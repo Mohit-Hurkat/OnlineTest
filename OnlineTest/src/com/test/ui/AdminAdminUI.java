@@ -24,17 +24,22 @@ public class AdminAdminUI {
 		Scanner scanner=new Scanner(System.in);		
 		Admin admin=null;
 		String pass;
+		boolean status=false;
 		
 			switch(choice)
 			{
 			case 1:
 					admin=adminbl.search(username);
-					System.out.println(admin);
 					username=admin.getUsername();
 					System.out.println("Update Password");
 					pass=scanner.next();
-					adminbl.update(username, pass);
-				break;
+					status=adminbl.update(username, pass);
+					if(status!=true){
+						System.out.println("Updation Failed");
+						return status;
+					}
+					System.out.println("Admin Updated");
+					return status;
 			case 2:
 					return false;
 			default:
