@@ -16,7 +16,7 @@ public class TestDaoImpl implements TestDao {
 	private static final String Set_Result="INSERT INTO RESULT(USERNAME,SUBJECT_ID,RESULT) VALUES(?,?,?)";
 	private static final String Check_Result="Select * from RESULT WHERE USERNAME=? AND SUBJECT_ID=? ";
 	private static final String Check_Questions="Select COUNT(*) from QUESTIONS WHERE SUBJECT_ID=? ";
-	private boolean flag=false;
+	private static final String Check_="Select * from SUBJECT WHERE SUBJECT_ID=? ";
 	
 	public boolean giveTest(String username,int subjectId) throws ClassNotFoundException, SQLException{
 		Scanner scanner=new Scanner(System.in);
@@ -101,6 +101,21 @@ public class TestDaoImpl implements TestDao {
 			res=rs1.getInt(3);
 		}
 		return res;
+	}
+	
+	public boolean check(int Subject_id) throws SQLException, ClassNotFoundException{
+		int res1=0;
+		Connection connection = JDBCConnection.getConnection();
+		PreparedStatement preparedStatement = connection.prepareStatement(Check_);
+		preparedStatement.setInt(1,Subject_id);
+		ResultSet res=preparedStatement.executeQuery();
+		while(res.next()){
+		res1=res.getInt(1);
+		}
+		if(res1>0){
+			return true;
+		}
+		return false;
 	}
 	
 }

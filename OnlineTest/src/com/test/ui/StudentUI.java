@@ -26,6 +26,7 @@ public class StudentUI
 	private static final String CHOICE_MSG = "Enter your choice";
 	private static final String FAIL = "Update Failed";
 	private String username;
+	private boolean status=false;
 	public void displayMenu()
 	{
 		System.out.println(STUDENT_MENU_OPTIONS);
@@ -63,7 +64,15 @@ public class StudentUI
 				}
 			System.out.println("Enter Subject-Id");
 			int subjectId=sc.nextInt();
+			tbl.check(subjectId);
+			if(status){
 			tbl.giveTest(username, subjectId);
+			}
+			else
+			{
+				System.out.println("Invalid Subject");
+				return false;
+			}
 			int result=tbl.result(username, subjectId);
 			result=result*25;
 			System.out.println("Your Score Percentage: "+result+"%");
