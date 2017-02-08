@@ -5,8 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.test.bean.Admin;
+import com.test.bean.Student;
 import com.test.helper.JDBCConnection;
 
 public class AdminDaoImpl implements AdminDao{
@@ -24,6 +27,8 @@ public class AdminDaoImpl implements AdminDao{
 		preparedStatement.setString(2, admin.getPassword());
 		numAffectedRows = preparedStatement.executeUpdate();  
 		//System.out.println(numAffectedRows);
+		preparedStatement.close();
+		connection.close();
 		return numAffectedRows > 0;
 	}
 	
@@ -33,6 +38,7 @@ public class AdminDaoImpl implements AdminDao{
 		PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
 		preparedStatement.setString(1, password);
 		preparedStatement.setString(2, username);
+		preparedStatement.executeQuery();
 		preparedStatement.close();
 		connection.close();
 		return true;
@@ -61,21 +67,38 @@ public class AdminDaoImpl implements AdminDao{
 		return false;
 	}
 	
+//	public Admin retrieveAdminRecord() throws IOException, ClassNotFoundException, SQLException{
+//		Admin admin=new Admin("admin", null);
+//		//List<Customer> cList = new ArrayList<>();
+//		Connection connection = JDBCConnection.getConnection();
+//		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_QUERY);
+//		preparedStatement.setString(1, admin.getUsername());
+//		ResultSet rs = preparedStatement.executeQuery();
+//		if(rs.next()){
+//			String pass = rs.getString("PASSWORD");
+//			admin = new Admin(admin.getUsername(),pass);
+//		}
+//		preparedStatement.close();
+//		connection.close();
+//		return admin;
+//	}
+
 	@Override
-	public Admin retrieveAdminRecord() throws IOException, ClassNotFoundException, SQLException{
-		Admin admin=new Admin("admin", null);
-		//List<Customer> cList = new ArrayList<>();
+	public Admin search(String username)throws IOException,ClassNotFoundException, SQLException {
+		Admin admin=null;
+		List<Admin> adminList = new ArrayList<>();
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_QUERY);
-		preparedStatement.setString(1, admin.getUsername());
+		preparedStatement.setString(1, username);
 		ResultSet rs = preparedStatement.executeQuery();
-		if(rs.next()){
-			String pass = rs.getString("PASSWORD");
-			admin = new Admin(admin.getUsername(),pass);
-		}
+		if(rs.next()){    //ask why next
+			String password= rs.getString("PASSWORD");
+			admin = new Admin(username,password);
+			System.out.println(admin);
+			adminList.add(admin);
+			}
 		preparedStatement.close();
 		connection.close();
 		return admin;
 	}
-
 }

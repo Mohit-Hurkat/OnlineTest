@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class AdminUI 
 {
  	 
-	private AdminAdminUI adminUi=new AdminAdminUI();
+	
 	private AdminStudentUI studentUi=new AdminStudentUI();
 	private AdminQuestionUI questionUi=new AdminQuestionUI();
 	private AdminSubjectUI subjectUi=new AdminSubjectUI();
@@ -18,6 +18,15 @@ public class AdminUI
 			"\n" + "2. Student Realted Tasks" + "\n" + "3. Question Related Tasks" +
 			"\n" + "4. Subject Related Tasks" + "\n" + "5. Exit"; 
 	private static final String CHOICE_MSG = "Enter your choice";
+	private String username;
+	private AdminAdminUI adminUi=new AdminAdminUI(username);
+	public AdminUI(String username) {
+		super();
+		this.username = username;
+		System.out.println(username);
+	}
+	
+	
 	public void displayMenu()
 	{
 		System.out.println(MENU_OPTIONS);
@@ -32,6 +41,7 @@ public class AdminUI
 		{
 		case 1:
 			do{
+				adminUi=new AdminAdminUI(username);
 			adminUi.displayMenu();;
 			System.out.print(CHOICE_MSG + ": ");
 			truthVal=adminUi.choice(scanner.nextInt());

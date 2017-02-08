@@ -11,14 +11,21 @@ public class AdminAdminUI {
 	private AdminLogic adminbl = new AdminLogic();
 	private static final String MENU_OPTIONS_ADMIN = "1. Insert New Admin" +
 			"\n 2. Update Admin Password" + "\n 3. Delete Admin"+ " \n 4. Exit";
+	private String username;
 	public void displayMenu(){
 		System.out.println(MENU_OPTIONS_ADMIN);
+	}
+	
+	public AdminAdminUI(String username) {
+		super();
+		this.username = username;
+		System.out.println(username);
 	}
 	
 	public boolean choice(int choice) throws ClassNotFoundException, IOException, SQLException{
 		Scanner scanner=new Scanner(System.in);		
 		Admin admin=null;
-		String username,pass;
+		String pass;
 		
 			switch(choice)
 			{
@@ -31,14 +38,16 @@ public class AdminAdminUI {
 					adminbl.insert(admin);
 				break;
 			case 2:
-					admin=adminbl.retrieveAdminRecord();
+				System.out.println(username);
+					admin=adminbl.search(username);
+					System.out.println(admin);
 					username=admin.getUsername();
 					System.out.println("Update Password");
 					pass=scanner.next();
 					adminbl.update(username, pass);
 				break;
 			case 3:
-				admin=adminbl.retrieveAdminRecord();
+				admin=adminbl.search(username);
 					username=admin.getUsername();
 					System.out.println("Enter Username You Want To Delete:");
 					pass=scanner.next();

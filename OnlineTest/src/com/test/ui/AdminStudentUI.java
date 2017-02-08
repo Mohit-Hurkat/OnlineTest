@@ -37,7 +37,6 @@ public class AdminStudentUI
 			List<Student> stuList=studentbl.displayAll();
 			for(Student s:stuList)
 				System.out.println(s);
-			displayMenu();
 			break;
 		case 4:
 			return false;

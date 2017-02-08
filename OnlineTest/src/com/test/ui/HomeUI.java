@@ -58,11 +58,11 @@ public class HomeUI {
 			System.out.println(PASSWORD_PROMPT + ": ");
 			String password = scanner.next();
 			boolean truthVal1 = false;
-				Admin admin=adminbl.retrieveAdminRecord();
+				Admin admin=adminbl.search(username);
 					if(username.equals(admin.getUsername())){
 						Map.Entry<Admin, Boolean> result =aa.authenticate(username, password);
 						if(result.getValue() != false){
-							AdminUI adminUI = new AdminUI();
+							AdminUI adminUI = new AdminUI(username);
 							do{
 								adminUI.displayMenu();
 								System.out.print(CHOICE_MSG + ": ");
