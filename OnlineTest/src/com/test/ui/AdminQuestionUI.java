@@ -35,24 +35,8 @@ public class AdminQuestionUI
 			System.out.println("One Question Successfully Inserted.");
 			break;
 		case 2:
-			System.out.println("Enter Subject Id:");
-			subId=Integer.parseInt(scanner.next());
-			System.out.println("Enter The Question Id You Want To Update:");
-			questionId=Integer.parseInt(scanner.next());
-			System.out.println("Write The New Question:");
-			ques=scanner.nextLine();
-			System.out.println("Enter New Choice One:");
-			ch1=scanner.nextLine();
-			System.out.println("Enter New Choice Second:");
-			ch2=scanner.nextLine();
-			System.out.println("Enter New Choice Third:");
-			ch3=scanner.nextLine();
-			System.out.println("Enter New Choice Fourth:");
-			ch4=scanner.nextLine();
-			System.out.println("Enter New Answer Of The Question:");
-			ans=Integer.parseInt(scanner.next());
-			question=new Question(quesId, subId, ques, ans, ch1, ch2, ch3, ch4);
-			questionbl.update(questionId, question);
+			question=qd.update();
+			questionbl.update(question.getQuestionId(), question);
 			System.out.println("One Question Successfully Updated.");
 			break;
 		case 3:

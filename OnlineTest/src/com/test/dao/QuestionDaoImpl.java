@@ -17,8 +17,8 @@ public class QuestionDaoImpl implements QuestionDao{
 	private static final String DELETE_QUERY = "DELETE FROM QUESTIONS WHERE QUESTION_ID = ?";
 	private static final String SELECT_ALL_QUERY = "SELECT * FROM QUESTIONS WHERE SUBJECT_ID= ?";	
 	private static final String SELECT_QUERY = "SELECT * FROM QUESTIONS WHERE QUESTION_ID = ?";
-    private static final String INSERT_QUERY="INSERT INTO QUESTIONS(QUESTION_ID,SUBJECT_ID,QUESTION,CHOICE1,CHOICE2,CHOICE3,CHOICE4,ANSWER) VALUES(?,?,?,?,?,?,?,?)";
-    private static final String GET_MAX_ID_QUERY = "SELECT COALESCE(MAX(questionId), 0) AS COUNT FROM QUESTIONS";
+    private static final String INSERT_QUERY="INSERT INTO QUESTIONS(QUESTION_ID,SUBJECT_ID,QUESTION,CHOICE1,CHOICE2,CHOICE3,CHOICE4,ANSWER,VALUE) VALUES(?,?,?,?,?,?,?,?,0)";
+    private static final String GET_MAX_ID_QUERY = "SELECT COALESCE(MAX(QUESTION_ID), 0) AS COUNT FROM QUESTIONS";
     private int question_id;
     private int subject_id;
     private String question_1;
