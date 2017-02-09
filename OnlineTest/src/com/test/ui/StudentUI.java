@@ -62,6 +62,14 @@ public class StudentUI
 				for(Subject sub:subList){
 				System.out.println(sub);
 				}
+			System.out.println("\n-------------------INSTRUCTIONS FOR ONLINE EXAM-------------------");
+			System.out.println("1)You will be given only 15 seconds to attempt every question");
+			System.out.println("2)You can't skip any question");
+			System.out.println("3)Every question has 4 options out of which only one is correct");
+			System.out.println("4)You can't attempt the same test twice");
+			System.out.println("5)Once answered you can't change your answer");
+			System.out.println("6)Each question is of one mark");
+			System.out.println("7)Your result will be displayed as per the number of correct questions you have answered in percentage");
 			System.out.println("Enter Subject-Id");
 			int subjectId=sc.nextInt();
 			status=tbl.check(subjectId);
