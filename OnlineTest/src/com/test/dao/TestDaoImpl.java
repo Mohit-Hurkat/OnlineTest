@@ -23,7 +23,7 @@ public class TestDaoImpl implements TestDao {
 			"select * FROM QUESTIONS ORDER BY DBMS_RANDOM.RANDOM)"+
 			"WHERE rownum <=10 AND SUBJECT_ID = ? AND VALUE = 0";
 	private static final String Set_Value1="update QUESTIONS SET VALUE = 1 where QUESTION_ID = ?";
-	private static final String Set_Result="INSERT INTO RESULT(USERNAME,SUBJECT_ID,RESULT,TIME_) VALUES(?,?,?,to_char(sysdate,'dd/mon/yyyy hh24:mi:ss'))";
+	private static final String Set_Result="INSERT INTO RESULT(USERNAME,SUBJECT_ID,RESULT,TIME_) VALUES(?,?,?,to_date(sysdate,'dd/mm/yyyy'))";
 	private static final String Check_Result="Select USERNAME,SUBJECT_ID,RESULT from RESULT WHERE USERNAME=? AND SUBJECT_ID=? ";
 	private static final String Check_Questions="Select COUNT(*) from QUESTIONS WHERE SUBJECT_ID=? ";
 	private static final String Check_="Select COUNT(*) from SUBJECT WHERE SUBJECT_ID=? ";
@@ -136,19 +136,19 @@ public class TestDaoImpl implements TestDao {
 		while(res.next()){
 		res1=res.getInt(1);
 		}
-		if(res1>0){
+		if(res1==0){
 			preparedStatement.close();
 			connection.close();
-			return true;
+			return false;
 		}
 		preparedStatement.close();
 		connection.close();
-		return false;
+		return true;
 	}
 	
 	
 	public boolean dateCheck(int Subject_id) throws SQLException, ClassNotFoundException{
-		DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String date1=dateFormat.format(date);
 		String res1 = null,res2=null;
@@ -159,8 +159,10 @@ public class TestDaoImpl implements TestDao {
 		while(res.next()){
 		res1=res.getString(1);
 		res2=res.getString(2);
+		res1=res1.substring(0, 10);
+		res2=res2.substring(0, 10);
 		}
-		if(date1.compareTo(res1)>0 && date1.compareTo(res2)<=0)
+		if(res1.compareTo(date1)<0 && res2.compareTo(date1)>0)
 		{
 			preparedStatement.close();
 			connection.close();

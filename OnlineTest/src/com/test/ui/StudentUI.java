@@ -40,7 +40,7 @@ public class StudentUI
 
 
 
-	public boolean choice(int choice) throws IOException, ClassNotFoundException, SQLException {	
+	public boolean choice(int choice) throws IOException, ClassNotFoundException, SQLException, InterruptedException {	
 
 		switch(choice)
 		{
@@ -56,7 +56,6 @@ public class StudentUI
 			break;
 		
 		case 2:
-			studentD.instruction();
 			Scanner sc= new Scanner(System.in);
 				List<Subject> subList=sbl.displayAll();
 				for(Subject sub:subList){
@@ -66,26 +65,36 @@ public class StudentUI
 			int subjectId=sc.nextInt();
 			status=tbl.check(subjectId);
 			if(status){
-			tbl.dateCheck(subjectId);
-			status=tbl.giveTest(username, subjectId);
+			status=tbl.dateCheck(subjectId);
 				if(status){
+					studentD.instruction();
+					System.out.println("Test Will Start In A Few Seconds ");
+					Thread.sleep(10000);
+					status=tbl.giveTest(username, subjectId);
+						if(status){	
 							int result=tbl.result(username, subjectId);
 							result=result*10;
 							System.out.println("Your Score Percentage: "+result+"%");
-							return false;
+							return true;
 							}
 							else{
 							System.out.println("\n");
 							return true;
 							}
 						}	
-			else{
-				System.out.println("Invalid Subject");
-				return true;
+				else{
+					System.out.println("Please Come Back after referring The Test Date");
+					return true;
+					
+				}
 			}
+				else{
+					System.out.println("Invalid Subject");
+					return true;
+				}
 		case 3:
 			status=tbl.result_student(username);
-			return status;
+			return true;
 
 		case 4:
 			return false;

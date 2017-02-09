@@ -45,6 +45,7 @@ public class StudentData {
 		 return null;
 	}
 	public void instruction(){
+		System.out.println("\n------------Don't Press Anything Until The Test Starts------------");
 		System.out.println("\n-------------------INSTRUCTIONS FOR ONLINE EXAM-------------------");
 		System.out.println("1)You will be given only 15 seconds to attempt every question");
 		System.out.println("2)You can't skip any question");
