@@ -45,10 +45,4 @@ public class SubjectDaoImplTest {
 		public void testDisplayAll() throws ClassNotFoundException, IOException, SQLException {
 			assertNotNull(subjectDao.displayAll());
 		}
-
-
-	
-
-	
-
 }
