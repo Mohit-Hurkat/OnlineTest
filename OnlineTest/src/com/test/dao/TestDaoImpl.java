@@ -11,7 +11,7 @@ public class TestDaoImpl implements TestDao {
 	private static final String Set_Value="update QUESTIONS SET VALUE = 0";
 	private static final String Call_Question="select * FROM ( "+
 			"select * FROM QUESTIONS ORDER BY DBMS_RANDOM.RANDOM)"+
-			"WHERE rownum <=4 AND SUBJECT_ID = ? AND VALUE = 0";
+			"WHERE rownum <=10 AND SUBJECT_ID = ? AND VALUE = 0";
 	private static final String Set_Value1="update QUESTIONS SET VALUE = 1 where QUESTION_ID = ?";
 	private static final String Set_Result="INSERT INTO RESULT(USERNAME,SUBJECT_ID,RESULT) VALUES(?,?,?)";
 	private static final String Check_Result="Select * from RESULT WHERE USERNAME=? AND SUBJECT_ID=? ";
