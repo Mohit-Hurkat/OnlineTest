@@ -3,6 +3,9 @@ package com.test.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 import javax.swing.plaf.synth.SynthStyle;
@@ -139,16 +142,21 @@ public class TestDaoImpl implements TestDao {
 	}
 	
 	
-	public boolean DateCheck(int Subject_id) throws SQLException, ClassNotFoundException{
-		int res1=0;
+	public boolean dateCheck(int Subject_id) throws SQLException, ClassNotFoundException{
+		DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+		Date date = new Date();
+		String date1=dateFormat.format(date);
+		String res1 = null,res2=null;
 		Connection connection = JDBCConnection.getConnection();
-		PreparedStatement preparedStatement = connection.prepareStatement(Check_);
+		PreparedStatement preparedStatement = connection.prepareStatement(Check_Date);
 		preparedStatement.setInt(1,Subject_id);
 		ResultSet res=preparedStatement.executeQuery();
 		while(res.next()){
-		res1=res.getInt(1);
+		res1=res.getString(1);
+		res2=res.getString(2);
 		}
-		if(res1>0){
+		if(date1.compareTo(res1)>0 && date1.compareTo(res2)<=0)
+		{
 			preparedStatement.close();
 			connection.close();
 			return true;

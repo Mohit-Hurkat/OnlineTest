@@ -23,23 +23,34 @@ public class TestDaoImplTest {
 		testDao=null;
 	}
 
+//	@Test(expected = SQLException.class)
+//	public void testGiveTestTrue() throws ClassNotFoundException, SQLException {
+//		assertTrue(testDao.giveTest("shikhar",2));
+//	}
+//	@Test(expected = SQLException.class)
+//	public void testGiveTestFalse() throws ClassNotFoundException, SQLException {
+//		assertFalse(testDao.giveTest("shikhar121231",2000));
+//	}
+//
+//	@Test(expected = SQLException.class)
+//	public void testResultTrue() throws ClassNotFoundException, SQLException {
+//		assertNotNull(testDao.result("shikhar", 2));
+//	}
+//	@Test(expected = SQLException.class)
+//	public void testResultFalse() throws ClassNotFoundException, SQLException {
+//		assertNull(testDao.result("shikhar23452353", 3242));
+//	}
+	
 	@Test(expected = SQLException.class)
-	public void testGiveTestTrue() throws ClassNotFoundException, SQLException {
-		assertTrue(testDao.giveTest("shikhar",2));
+	public void testDateT() throws ClassNotFoundException, SQLException {
+		assertTrue(testDao.dateCheck(3));
 	}
+	
 	@Test(expected = SQLException.class)
-	public void testGiveTestFalse() throws ClassNotFoundException, SQLException {
-		assertFalse(testDao.giveTest("shikhar121231",2000));
+	public void testDateF() throws ClassNotFoundException, SQLException {
+		assertFalse(testDao.dateCheck(3));
 	}
-
-	@Test(expected = SQLException.class)
-	public void testResultTrue() throws ClassNotFoundException, SQLException {
-		assertNotNull(testDao.result("shikhar", 2));
-	}
-	@Test(expected = SQLException.class)
-	public void testResultFalse() throws ClassNotFoundException, SQLException {
-		assertNull(testDao.result("shikhar23452353", 3242));
-	}
+	
 
 
 }

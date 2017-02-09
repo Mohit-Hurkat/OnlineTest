@@ -17,5 +17,8 @@ public class TestLogic {
 	 public boolean check(int subjectId) throws ClassNotFoundException, SQLException{
 		 return tdao.check(subjectId);
 	 }
+	 public boolean dateCheck(int subject_id) throws SQLException, ClassNotFoundException{
+		 return tdao.dateCheck(subject_id);
+	 }
 
 }

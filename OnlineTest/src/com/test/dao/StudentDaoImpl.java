@@ -23,9 +23,9 @@ public class StudentDaoImpl implements StudentDao{
     @Override
 	public boolean insert(Student student) throws IOException, ClassNotFoundException, SQLException{
 		int numAffectedRows=0;
-		System.out.println(student);
 		if(student.getUsername().equals("admin"))
 		{
+			System.out.println("admin : Username Not Allowed");
 			return false;
 		}
 		Connection connection = JDBCConnection.getConnection();
@@ -56,7 +56,6 @@ public class StudentDaoImpl implements StudentDao{
 			String StudentPhone = rs.getString("PHONE");
 			String StudentEmail = rs.getString("Email");
 			student = new Student(username,password,StudentName,StudentPhone, StudentEmail);
-			System.out.println(student);
 			studentList.add(student);
 			}
 		preparedStatement.close();
