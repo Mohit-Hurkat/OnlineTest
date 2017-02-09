@@ -31,7 +31,7 @@ public class AdminSubjectUI {
 			System.out.println("Enter Start Date (dd/mon/yyyy) ");
 			startd=scanner.next();
 			System.out.println("Enter End Date (dd/mon/yyyy)");
-			endd=scanner.next();
+			endd=scanner.nextLine();
 			if(subjectbl.insert(sub,startd,endd))
 			{
 				System.out.println("One Subject Successfully Inserted.");

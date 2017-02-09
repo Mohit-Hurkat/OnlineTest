@@ -47,7 +47,7 @@ public class HomeUI {
 					System.out.println(ACC_CREATION_FAILED_MSG1);
 				}
 			} catch (ClassNotFoundException | IOException | SQLException e) {
-				System.out.println(ACC_CREATION_FAILED_MSG + ": " + e);
+				System.out.println(ACC_CREATION_FAILED_MSG1 + ": " );
 			}
 			break;
 		case 2:
