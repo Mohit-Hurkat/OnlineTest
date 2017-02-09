@@ -28,5 +28,8 @@ public class SubjectLogic {
 	public String subname(int subjectId) throws IOException, ClassNotFoundException, SQLException{
 		return subjectDao.subname(subjectId);
 	}
+	public List<Subject> showSubject(String username) throws IOException, ClassNotFoundException, SQLException{
+		return subjectDao.showSubject(username);
+	}
 }
  

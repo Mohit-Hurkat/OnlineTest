@@ -18,6 +18,7 @@ public class SubjectDaoImpl implements SubjectDao {
 	private static final String SELECT_ALL_QUERY = "SELECT * FROM SUBJECT";
 	private static final String UPDATE_QUERY = "UPDATE SUBJECT SET SUBJECT_NAME = ? ,START_DATE = to_date(?,'dd/mm/yyyy'),END_DATE = to_date(?,'dd/mm/yyyy') WHERE SUBJECT_ID = ?";
 	private static final String DELETE_QUERY = "DELETE FROM SUBJECT WHERE SUBJECT_ID = ?";
+	private static final String SELECT_RESULT = "SELECT SUBJECT_ID,SUBJECT_NAME FROM SUBJECT WHERE SUBJECT_ID IN (SELECT SUBJECT_ID FROM RESULT WHERE USERNAME = ?)";
 	private String start,end; 
 	
 	@Override
@@ -136,6 +137,30 @@ public class SubjectDaoImpl implements SubjectDao {
 		preparedStatement.close();  
 		connection.close();
 		return subject1;
+	}
+	
+	@Override
+	public List<Subject> showSubject(String username) throws IOException, ClassNotFoundException, SQLException {
+		List<Subject> subjectList = new ArrayList<>();
+		Connection connection = JDBCConnection.getConnection();
+		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_RESULT);
+		preparedStatement.setString(1, username);
+		ResultSet rs = preparedStatement.executeQuery();
+		if(rs.next()==false){
+			System.out.println("Student hasn't given any test.");
+			subjectList=null;
+		}
+		while(rs.next()){
+			int subjectId=rs.getInt("SUBJECT_ID");
+			String subject = rs.getString("SUBJECT_NAME");
+			System.out.println("\n Subject Id: "+subjectId+"  Subject Name: "+subject);
+			Subject subOb = new Subject(subjectId, subject,"","");
+			subjectList.add(subOb);
+		}
+		rs.close();
+		preparedStatement.close();  
+		connection.close();
+		return subjectList;
 	}
 
 	

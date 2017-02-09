@@ -28,7 +28,6 @@ public class AdminUI
 	
 	public void displayMenu()
 	{
-		System.out.println("Welcome ADMIN\n");
 		System.out.println(MENU_OPTIONS);
 	}
 	

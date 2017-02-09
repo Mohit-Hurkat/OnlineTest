@@ -65,7 +65,8 @@ public class HomeUI {
 						Map.Entry<Admin, Boolean> result =aa.authenticate(username, password);
 						if(result.getValue() != false){
 							AdminUI adminUI = new AdminUI(username);
-							do{
+							do{		
+								System.out.println("Welcome ADMIN\n");
 								adminUI.displayMenu();
 								System.out.print(CHOICE_MSG + ": ");
 								truthVal1 = adminUI.choice(scanner.nextInt());
@@ -81,6 +82,7 @@ public class HomeUI {
 							if(result.getValue() != false){
 								StudentUI StudentUI = new StudentUI(username);
 								do {
+									System.out.println("Welcome "+username);
 									StudentUI.displayMenu();
 									System.out.print(CHOICE_MSG + ": ");
 									truthVal1 = StudentUI.choice(scanner.nextInt());

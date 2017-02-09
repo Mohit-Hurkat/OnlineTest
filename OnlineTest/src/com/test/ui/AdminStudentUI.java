@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import com.test.bean.Question;
 import com.test.bean.Student;
+import com.test.bean.Subject;
 import com.test.bl.StudentLogic;
 import com.test.bl.SubjectLogic;
 import com.test.bl.TestLogic;
@@ -16,6 +17,7 @@ public class AdminStudentUI
 	private StudentLogic studentbl = new StudentLogic();
 	private TestLogic testbl = new TestLogic();
 	private SubjectLogic subjectbl = new SubjectLogic();
+	private boolean status=false;
 	private static final String MENU_OPTIONS_STUDENT = "\n"+"1.Search Student" +
 			"\n2.Delete Student" + "\n3.List All Students"+ " \n4.Check Student Result"+" \n5.Exit"+"\n";
 	public void displayMenu(){
@@ -55,12 +57,23 @@ public class AdminStudentUI
 		case 4:
 			System.out.println("Enter Student's UserName:");
 			username=scanner.next();
+			List<Subject> subList=subjectbl.showSubject(username);
+			if(subList==null){
+				return false;
+			}
 			System.out.println("Enter SubjectID");
 			subjectId=scanner.nextInt();
-			subject=subjectbl.subname(subjectId);
-			int result=testbl.result(username, subjectId);
-			System.out.println("Username:" + username+" has scored "+(result*10)+"% in "+subject);
-			break;
+			for(Subject s:subList)
+			{
+				if(s.getSubjectId()==subjectId){
+					subject=subjectbl.subname(subjectId);
+					int result=testbl.result(username, subjectId);
+					System.out.println("Username:" + username+" has scored "+(result*10)+"% in "+subject);
+					return false;
+				}
+			}
+			System.out.println("Invaid Subject ID");
+			return false;
 		case 5:
 			return false;
 		default:
