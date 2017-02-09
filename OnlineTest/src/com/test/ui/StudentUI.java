@@ -21,9 +21,9 @@ public class StudentUI
 	private TestLogic tbl=new TestLogic();
 	private SubjectLogic sbl=new SubjectLogic();
 	private Student student=null;
-	private static final String STUDENT_MENU_OPTIONS ="1.Update Your Record"+	
-			"\n" + "2.Give Online Test"+	
-			"\n" + "3.Exit"; 
+	private static final String STUDENT_MENU_OPTIONS ="\n1.Update Your Record"+	
+			"\n" + "2.Give Online Test"+ "\n" + "3.View Previous Results"+
+			"\n" + "4.Exit"; 
 	private static final String FAIL = "Update Failed";
 	private String username;
 	private boolean status=false;
@@ -84,6 +84,10 @@ public class StudentUI
 				return true;
 			}
 		case 3:
+			status=tbl.result_student(username);
+			return status;
+
+		case 4:
 			return false;
 		
 		

@@ -10,7 +10,7 @@ import com.test.bl.SubjectLogic;
 
 public class AdminSubjectUI {
 	private SubjectLogic subjectbl=new SubjectLogic();
-	private static final String MENU_OPTIONS_SUBJECT = "1.Insert a Subject" +
+	private static final String MENU_OPTIONS_SUBJECT = "\n1.Insert a Subject" +
 			"\n2.Update a Subject" + "\n3.Delete a Subject"+ " \n4.Search a Subject"+
 			"\n5.Display all Subjects"+ "\n6.Exit";
 	public void displayMenu(){

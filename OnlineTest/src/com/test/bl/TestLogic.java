@@ -1,5 +1,6 @@
 package com.test.bl;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import com.test.dao.TestDao;
@@ -19,6 +20,10 @@ public class TestLogic {
 	 }
 	 public boolean dateCheck(int subject_id) throws SQLException, ClassNotFoundException{
 		 return tdao.dateCheck(subject_id);
+	 }
+	 public boolean result_student(String username) throws ClassNotFoundException, SQLException, IOException{
+		return tdao.result_student(username) ;
+		 
 	 }
 
 }

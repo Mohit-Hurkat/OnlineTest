@@ -18,7 +18,7 @@ public class AdminStudentUI
 	private TestLogic testbl = new TestLogic();
 	private SubjectLogic subjectbl = new SubjectLogic();
 	private boolean status=false;
-	private static final String MENU_OPTIONS_STUDENT = "\n"+"1.Search Student" +
+	private static final String MENU_OPTIONS_STUDENT = "\n1.Search Student" +
 			"\n2.Delete Student" + "\n3.List All Students"+ " \n4.Check Student Result"+" \n5.Exit"+"\n";
 	public void displayMenu(){
 		System.out.println(MENU_OPTIONS_STUDENT);

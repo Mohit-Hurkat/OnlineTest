@@ -12,7 +12,7 @@ import com.test.helper.QuestionData;
 public class AdminQuestionUI 
 {
 	private QuestionLogic questionbl=new QuestionLogic();
-	private static final String MENU_OPTIONS_QUESTION = "1.Insert a question" +
+	private static final String MENU_OPTIONS_QUESTION = "\n1.Insert a question" +
 			"\n2.Update a question" + "\n3.Delete a Question"+ " \n4.Search a Question"+
 			"\n5.Display all Questions"+ "\n6.Exit";
 	private QuestionData qd=new QuestionData();

@@ -10,7 +10,11 @@ import java.util.Scanner;
 
 import javax.swing.plaf.synth.SynthStyle;
 
+import java.io.IOException;
 import java.sql.Connection;
+
+import com.test.bean.Subject;
+import com.test.bl.SubjectLogic;
 import com.test.helper.JDBCConnection;
 
 public class TestDaoImpl implements TestDao {
@@ -24,6 +28,7 @@ public class TestDaoImpl implements TestDao {
 	private static final String Check_Questions="Select COUNT(*) from QUESTIONS WHERE SUBJECT_ID=? ";
 	private static final String Check_="Select COUNT(*) from SUBJECT WHERE SUBJECT_ID=? ";
 	private static final String Check_Date="Select START_DATE,END_DATE from SUBJECT WHERE SUBJECT_ID=? ";
+	private static final String Check_Result2="Select SUBJECT_ID,RESULT from RESULT WHERE USERNAME=?";
 	
 	public boolean giveTest(String username,int subjectId) throws ClassNotFoundException, SQLException{
 		Scanner scanner=new Scanner(System.in);
@@ -164,6 +169,29 @@ public class TestDaoImpl implements TestDao {
 		preparedStatement.close();
 		connection.close();
 		return false;
+	}
+	
+	public boolean result_student(String username) throws ClassNotFoundException, SQLException, IOException{
+		int res=0;
+		SubjectLogic subjectbl=new SubjectLogic();
+		Subject subject=null;
+		Connection connection = JDBCConnection.getConnection();
+		PreparedStatement preparedStatement = connection.prepareStatement(Check_Result2);
+		preparedStatement.setString(1,username);
+		ResultSet rs1=preparedStatement.executeQuery();
+		if(rs1.next()==false){
+			System.out.println("Student hasn't given any test.");
+			return false;
+		}
+		while(rs1.next()){
+			int subject_id=rs1.getInt(1);
+			res=rs1.getInt(2);
+			subject=subjectbl.search(subject_id);
+			System.out.println("Subject Name:" +subject.getSubject()+" and your Score in Percentage is "+(res*10)+"%");
+		}
+		preparedStatement.close();
+		connection.close();
+		return true;
 	}
 	
 	

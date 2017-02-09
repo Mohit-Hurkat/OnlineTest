@@ -14,7 +14,7 @@ public class AdminUI
 	private AdminStudentUI studentUi=new AdminStudentUI();
 	private AdminQuestionUI questionUi=new AdminQuestionUI();
 	private AdminSubjectUI subjectUi=new AdminSubjectUI();
-	private static final String MENU_OPTIONS = "1.Admin Related Tasks" +
+	private static final String MENU_OPTIONS = "\n1.Admin Related Tasks" +
 			"\n" + "2.Student Realted Tasks" + "\n" + "3.Question Related Tasks" +
 			"\n" + "4.Subject Related Tasks" + "\n" + "5.Exit"+"\n"; 
 	private static final String CHOICE_MSG = "Enter Your Choice";
