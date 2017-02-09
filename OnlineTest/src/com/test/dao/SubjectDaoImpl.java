@@ -120,6 +120,23 @@ public class SubjectDaoImpl implements SubjectDao {
 		connection.close();
 		return updateCount > 0;
 	}
+	
+	
+	@Override
+	public String subname(int subjectId) throws IOException, ClassNotFoundException, SQLException {
+		String subject1=null;
+		Connection connection = JDBCConnection.getConnection();
+		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_QUERY);
+		preparedStatement.setInt(1, subjectId);
+		ResultSet rs = preparedStatement.executeQuery();
+		if(rs.next()){
+		subject1 = rs.getString("SUBJECT_NAME");
+		}
+		rs.close();
+		preparedStatement.close();  
+		connection.close();
+		return subject1;
+	}
 
 	
 	

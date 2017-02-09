@@ -25,5 +25,8 @@ public class SubjectLogic {
 	public boolean delete(int subjectId) throws IOException, ClassNotFoundException, SQLException{
 		return subjectDao.delete(subjectId);
 	}
+	public String subname(int subjectId) throws IOException, ClassNotFoundException, SQLException{
+		return subjectDao.subname(subjectId);
+	}
 }
  
