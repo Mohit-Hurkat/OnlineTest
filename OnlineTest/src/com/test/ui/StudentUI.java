@@ -69,7 +69,7 @@ public class StudentUI
 				if(status){
 					studentD.instruction();
 					System.out.println("Test Will Start In A Few Seconds ");
-					Thread.sleep(10000);
+					Thread.sleep(15000);
 					status=tbl.giveTest(username, subjectId);
 						if(status){	
 							int result=tbl.result(username, subjectId);

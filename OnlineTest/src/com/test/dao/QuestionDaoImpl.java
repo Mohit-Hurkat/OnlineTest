@@ -13,11 +13,11 @@ import com.test.helper.JDBCConnection;
 
 public class QuestionDaoImpl implements QuestionDao{
 	private static final String UPDATE_QUERY = "UPDATE QUESTIONS SET SUBJECT_ID = ?, QUESTION = ?," + 
-			"CHOICE1 = ?, CHOICE2 = ?, CHOICE3 = ?, CHOICE4 = ?, ANSWER = ?, VALUE = ? WHERE QUESTION_ID = ?";
+			"CHOICE1 = ?, CHOICE2 = ?, CHOICE3 = ?, CHOICE4 = ?, ANSWER = ?, VALUE = ?,ANS=? WHERE QUESTION_ID = ?";
 	private static final String DELETE_QUERY = "DELETE FROM QUESTIONS WHERE QUESTION_ID = ?";
 	private static final String SELECT_ALL_QUERY = "SELECT * FROM QUESTIONS WHERE SUBJECT_ID= ?";	
 	private static final String SELECT_QUERY = "SELECT * FROM QUESTIONS WHERE QUESTION_ID = ?";
-    private static final String INSERT_QUERY="INSERT INTO QUESTIONS(QUESTION_ID,SUBJECT_ID,QUESTION,CHOICE1,CHOICE2,CHOICE3,CHOICE4,ANSWER,VALUE) VALUES(?,?,?,?,?,?,?,?,0)";
+    private static final String INSERT_QUERY="INSERT INTO QUESTIONS(QUESTION_ID,SUBJECT_ID,QUESTION,CHOICE1,CHOICE2,CHOICE3,CHOICE4,ANSWER,ANS,VALUE) VALUES(?,?,?,?,?,?,?,?,?,0)";
     private static final String GET_MAX_ID_QUERY = "SELECT COALESCE(MAX(QUESTION_ID), 0) AS COUNT FROM QUESTIONS";
     private int question_id;
     private int subject_id;
@@ -26,11 +26,12 @@ public class QuestionDaoImpl implements QuestionDao{
     private String choice_2;
     private String choice_3;
     private String choice_4;
-    private int ans;
+    private int ans2;
+    private String ans1;
     
     @Override
 	public boolean insert(Question question) throws IOException, ClassNotFoundException, SQLException{
-		int numAffectedRows;
+		int numAffectedRows=0;
 		Connection connection = JDBCConnection.getConnection();
 		int questionId = this.getMaxId() + 1;
 		PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY);
@@ -41,11 +42,13 @@ public class QuestionDaoImpl implements QuestionDao{
 		preparedStatement.setString(5, question.getChoice2());
 		preparedStatement.setString(6, question.getChoice3());
 		preparedStatement.setString(7, question.getChoice4());
+		System.out.println(question.getAnswer());
 		preparedStatement.setInt(8, question.getAnswer());
+		System.out.println(question.getAns());
+		preparedStatement.setString(9, question.getAns());
 		numAffectedRows = preparedStatement.executeUpdate();
 		preparedStatement.close();
 		connection.close();
-		//System.out.println(numAffectedRows);
 		return numAffectedRows > 0;
 	}
     
@@ -65,8 +68,9 @@ public class QuestionDaoImpl implements QuestionDao{
 			choice_2= rs.getString("CHOICE2");
 			choice_3= rs.getString("CHOICE3");
 			choice_4= rs.getString("CHOICE4");
-			ans = rs.getInt("ANSWER");
-			question = new Question(questionId, subject_id, question_1, ans, choice_1, choice_2, choice_3, choice_4);
+			ans2 = rs.getInt("ANSWER");
+			ans1=rs.getString("ANS");
+			question = new Question(questionId, subject_id, question_1, ans2, choice_1, choice_2, choice_3, choice_4,ans1);
 			questionList.add(question);
 		}
 		rs.close();
@@ -90,8 +94,9 @@ public class QuestionDaoImpl implements QuestionDao{
 			choice_2= rs.getString("CHOICE2");
 			choice_3= rs.getString("CHOICE3");
 			choice_4= rs.getString("CHOICE4");
-			ans = rs.getInt("ANSWER");
-			question = new Question(question_id, subjectId, question_1, ans, choice_1, choice_2, choice_3, choice_4);
+			ans2 = rs.getInt("ANSWER");
+			ans1=rs.getString("ANS");
+			question = new Question(question_id, subjectId, question_1, ans2, choice_1, choice_2, choice_3, choice_4,ans1);
 			questionList.add(question);
 		}
 		rs.close();
@@ -112,7 +117,8 @@ public class QuestionDaoImpl implements QuestionDao{
 		preparedStatement.setString(6, question.getChoice4());
 		preparedStatement.setInt(7, question.getAnswer());
 		preparedStatement.setInt(8,0);
-		preparedStatement.setInt(9, questionId);
+		preparedStatement.setString(9, question.getAns());
+		preparedStatement.setInt(10, questionId);
 		preparedStatement.executeQuery();
 		preparedStatement.close();
 		connection.close();

@@ -9,11 +9,12 @@ public class Question {
    private String choice2;
    private String choice3;
    private String choice4;
+   private String ans;
 
    
    
 public Question(int questionId, int subjectId, String question, int answer, String choice1, String choice2,
-		String choice3, String choice4) {
+		String choice3, String choice4,String ans) {
 	super();
 	this.questionId = questionId;
 	this.subjectId = subjectId;
@@ -23,10 +24,27 @@ public Question(int questionId, int subjectId, String question, int answer, Stri
 	this.choice2 = choice2;
 	this.choice3 = choice3;
 	this.choice4 = choice4;
+	switch(answer){
+	case 1:this.ans= choice1;
+	break;
+	case 2:this.ans= choice2;
+	break;
+	case 3:this.ans= choice3;
+	break;
+	case 4:this.ans= choice4;
+	break;
+	default: this.ans=null;
+	}
+}
+public String getAns() {
+	return ans;
+}
+public void setAns(String ans) {
+	this.ans = ans;
 }
 @Override
 public String toString() {
-	return "SubjectId=" + subjectId +" QuestionId=" + questionId + "\nQuestion=" + question + ",\nAnswer="+ answer;
+	return "SubjectId=" + subjectId +" QuestionId=" + questionId + "\nQuestion=" + question + ",\nAnswer="+ ans;
 }
 public String display() {
 	return "Question=" + question + "\n1." + choice1 + "\n2." + choice2 + "\n3." + choice3

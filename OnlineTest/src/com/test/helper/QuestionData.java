@@ -8,7 +8,7 @@ import com.test.bean.Student;
 public class QuestionData {
 
 	Question question;
-	private String question1,choice1,choice2,choice3,choice4;
+	private String question1,choice1,choice2,choice3,choice4,ans=null;
 	private int subjectId,answer,QuestionId;
 	Scanner scanner=new Scanner(System.in);
 	
@@ -27,9 +27,9 @@ public class QuestionData {
 		choice3=scanner.nextLine();
 		System.out.println("Enter Option 4:");
 		choice4=scanner.nextLine();
-		System.out.println("Enter Answer Of The Question:");
+		System.out.println("Enter Answer Of The Question(option number):");
 		answer=scanner.nextInt();
-		 question=new Question(0,subjectId, question1, answer, choice1, choice2, choice3, choice4);
+		question=new Question(0,subjectId, question1, answer, choice1, choice2, choice3, choice4,ans);
 		 return question;
 	}
 	public Question update(){
@@ -51,9 +51,10 @@ public class QuestionData {
 			choice4=scanner.nextLine();
 			System.out.println("Enter Answer Of The Question:");
 			answer=scanner.nextInt();
-			 question=new Question(QuestionId,subjectId, question1, answer, choice1, choice2, choice3, choice4);
+			 question=new Question(QuestionId,subjectId, question1, answer, choice1, choice2, choice3, choice4,ans);
 			 return question;
 		} catch (Exception e) {
+			System.out.println(e);
 			System.out.println("Enter Appropriate Information");
 		}
 		 return null;

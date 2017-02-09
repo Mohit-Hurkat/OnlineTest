@@ -15,6 +15,7 @@ public class MyMenu {
 	
 	public static boolean funtion() throws ClassNotFoundException, SQLException{
 		HomeUI homeUI=new HomeUI();
+		int i,j,k,l;
 		Scanner sc=new Scanner(System.in);
 		boolean truthVal = false;
 		do{

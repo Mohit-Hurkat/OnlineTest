@@ -28,7 +28,7 @@ public class QusetionDaoImplTest {
 
 	@Test(expected = SQLException.class)
 	public void testInsert() throws ClassNotFoundException, IOException, SQLException {
-		question=new Question(100,12,"What is 2+2",4,"1","2","3","4");
+		question=new Question(100,12,"What is 2+2",4,"1","2","3","4","");
 		assertTrue(questionDao.insert(question));
 	}
 
@@ -52,12 +52,12 @@ public class QusetionDaoImplTest {
 
 	@Test(expected = SQLException.class)
 	public void testUpdateTrue() throws ClassNotFoundException, IOException, SQLException {
-		question=new Question(101,12,"What is 2+1",3,"1","2","3","4");
+		question=new Question(100,12,"What is 2+2",4,"1","2","3","4","");
 		assertTrue(questionDao.update(100, question));
 	}
 	@Test(expected = SQLException.class)
 	public void testUpdateFalse() throws ClassNotFoundException, IOException, SQLException {
-		question=new Question(101,12,"What is 2+1",3,"1","2","3","4");
+		question=new Question(100,12,"What is 2+2",4,"1","2","3","4","");
 		assertTrue(questionDao.update(1021, question));
 	}
 

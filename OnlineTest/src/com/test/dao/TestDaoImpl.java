@@ -34,6 +34,7 @@ public class TestDaoImpl implements TestDao {
 	public boolean giveTest(String username,int subjectId) throws ClassNotFoundException, SQLException{
 		Scanner scanner=new Scanner(System.in);
 		 int res3 = 0,ans1=0,count=0;
+		 int i,j,k,l;
 		 int numAffectedRows;
 		 String ans;
 		Connection connection = JDBCConnection.getConnection();
@@ -67,35 +68,40 @@ public class TestDaoImpl implements TestDao {
 		ResultSet rs = preparedStatement1.executeQuery();
 		PreparedStatement preparedStatement2 = connection.prepareStatement(Set_Value1);
 			while(rs.next()){
-				long endTime = System.currentTimeMillis() + 15000;
+				long endTime = System.currentTimeMillis() + 25000;
 				int questionid = rs.getInt(1);
 				String question=rs.getString(3);
-				String choice1=rs.getString(4);
-				String choice2=rs.getString(5);
-				String choice3=rs.getString(6);
-				String choice4=rs.getString(7);
-				int answer=rs.getInt(8);
+				i= (int)(Math.random()*4);
+				i=i+4;
+				j=((i+1)%4)+4;
+				k=((j+1)%4)+4;
+				l=((k+1)%4)+4;
+				String choice1=rs.getString(i);
+				String choice2=rs.getString(j);
+				String choice3=rs.getString(k);
+				String choice4=rs.getString(l);
+				String answer=rs.getString("ANS");
 				System.out.println("Question: "+question+"\n 1. "+
 				choice1+"\n 2. "+choice2+"\n 3. "+choice3+"\n 4. "+choice4 );
 				System.out.println("Enter Your Answer Number");
 				ans=scanner.next();
 				switch(ans){
-				case "1": ans1=1;
+				case "1": ans=choice1;
 				break;
-				case "2": ans1=1;
+				case "2": ans=choice2;
 				break;
-				case "3": ans1=1;
+				case "3": ans=choice3;
 				break;
-				case "4": ans1=1;
+				case "4": ans=choice4;
 				break;
-				default:	ans1=0;
+				default:	ans=null;
 					System.out.println("Invalid Choice");
 				} 
 				if (System.currentTimeMillis() > endTime){
 					System.out.println("Time Exceeded");
-					ans1=0;
+					ans=null;
 				}				
-				else if(ans1==answer){
+				else if(ans.equals(answer)){
 					count++;					
 				}
 				preparedStatement2.setInt(1,questionid);

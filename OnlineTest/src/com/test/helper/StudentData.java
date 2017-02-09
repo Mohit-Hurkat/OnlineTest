@@ -47,7 +47,7 @@ public class StudentData {
 	public void instruction(){
 		System.out.println("\n------------Don't Press Anything Until The Test Starts------------");
 		System.out.println("\n-------------------INSTRUCTIONS FOR ONLINE EXAM-------------------");
-		System.out.println("1)You will be given only 15 seconds to attempt every question");
+		System.out.println("1)You will be given only 25 seconds to attempt every question");
 		System.out.println("2)You can't skip any question");
 		System.out.println("3)Every question has 4 options out of which only one is correct");
 		System.out.println("4)You can't attempt the same test twice");
