@@ -28,7 +28,7 @@ public class AdminDaoImpl implements AdminDao{
 		numAffectedRows=preparedStatement.executeUpdate();
 		preparedStatement.close();
 		connection.close();
-		return numAffectedRows > 0;
+		return numAffectedRows>0;
 	}
  
 	@Override

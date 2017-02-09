@@ -25,7 +25,7 @@ public class TestDaoImplTest {
 
 	@Test(expected = SQLException.class)
 	public void testGiveTestTrue() throws ClassNotFoundException, SQLException {
-		assertTrue(testDao.giveTest("shikhar",2));
+		assertTrue(testDao.giveTest("shikhar",3));
 	}
 	@Test(expected = SQLException.class)
 	public void testGiveTestFalse() throws ClassNotFoundException, SQLException {
