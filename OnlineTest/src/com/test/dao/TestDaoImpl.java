@@ -4,6 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+
+import javax.swing.plaf.synth.SynthStyle;
+
 import java.sql.Connection;
 import com.test.helper.JDBCConnection;
 
@@ -13,15 +16,17 @@ public class TestDaoImpl implements TestDao {
 			"select * FROM QUESTIONS ORDER BY DBMS_RANDOM.RANDOM)"+
 			"WHERE rownum <=10 AND SUBJECT_ID = ? AND VALUE = 0";
 	private static final String Set_Value1="update QUESTIONS SET VALUE = 1 where QUESTION_ID = ?";
-	private static final String Set_Result="INSERT INTO RESULT(USERNAME,SUBJECT_ID,RESULT) VALUES(?,?,?)";
-	private static final String Check_Result="Select * from RESULT WHERE USERNAME=? AND SUBJECT_ID=? ";
+	private static final String Set_Result="INSERT INTO RESULT(USERNAME,SUBJECT_ID,RESULT,TIME_) VALUES(?,?,?,to_char(sysdate,'dd/mon/yyyy hh24:mi:ss'))";
+	private static final String Check_Result="Select USERNAME,SUBJECT_ID,RESULT from RESULT WHERE USERNAME=? AND SUBJECT_ID=? ";
 	private static final String Check_Questions="Select COUNT(*) from QUESTIONS WHERE SUBJECT_ID=? ";
-	private static final String Check_="Select * from SUBJECT WHERE SUBJECT_ID=? ";
+	private static final String Check_="Select COUNT(*) from SUBJECT WHERE SUBJECT_ID=? ";
+	private static final String Check_Date="Select START_DATE,END_DATE from SUBJECT WHERE SUBJECT_ID=? ";
 	
 	public boolean giveTest(String username,int subjectId) throws ClassNotFoundException, SQLException{
 		Scanner scanner=new Scanner(System.in);
-		 int res3 = 0,ans,count=0;
+		 int res3 = 0,ans1=0,count=0;
 		 int numAffectedRows;
+		 String ans;
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(Check_Questions);
 		preparedStatement.setInt(1,subjectId);
@@ -64,15 +69,24 @@ public class TestDaoImpl implements TestDao {
 				System.out.println("Question: "+question+"\n 1. "+
 				choice1+"\n 2. "+choice2+"\n 3. "+choice3+"\n 4. "+choice4 );
 				System.out.println("Enter Your Answer Number");
-				ans=scanner.nextInt();
-				if(ans>4||ans<1){
+				ans=scanner.next();
+				switch(ans){
+				case "1": ans1=1;
+				break;
+				case "2": ans1=1;
+				break;
+				case "3": ans1=1;
+				break;
+				case "4": ans1=1;
+				break;
+				default:	ans1=0;
 					System.out.println("Invalid Choice");
 				} 
-				else if (System.currentTimeMillis() > endTime){
+				if (System.currentTimeMillis() > endTime){
 					System.out.println("Time Exceeded");
-					ans=0;
+					ans1=0;
 				}				
-				else if(ans==answer){
+				else if(ans1==answer){
 					count++;					
 				}
 				preparedStatement2.setInt(1,questionid);
@@ -100,6 +114,8 @@ public class TestDaoImpl implements TestDao {
 		while(rs1.next()){
 			res=rs1.getInt(3);
 		}
+		preparedStatement.close();
+		connection.close();
 		return res;
 	}
 	
@@ -113,8 +129,32 @@ public class TestDaoImpl implements TestDao {
 		res1=res.getInt(1);
 		}
 		if(res1>0){
+			preparedStatement.close();
+			connection.close();
 			return true;
 		}
+		preparedStatement.close();
+		connection.close();
+		return false;
+	}
+	
+	
+	public boolean DateCheck(int Subject_id) throws SQLException, ClassNotFoundException{
+		int res1=0;
+		Connection connection = JDBCConnection.getConnection();
+		PreparedStatement preparedStatement = connection.prepareStatement(Check_);
+		preparedStatement.setInt(1,Subject_id);
+		ResultSet res=preparedStatement.executeQuery();
+		while(res.next()){
+		res1=res.getInt(1);
+		}
+		if(res1>0){
+			preparedStatement.close();
+			connection.close();
+			return true;
+		}
+		preparedStatement.close();
+		connection.close();
 		return false;
 	}
 	

@@ -20,7 +20,7 @@ public class AdminSubjectUI {
 	public boolean choice(int choice) throws ClassNotFoundException, IOException, SQLException{
 		Scanner scanner=new Scanner(System.in);		
 		int subId;
-		String sub;
+		String sub,startd,endd;
 		Subject subject=null;
 		  
 		switch(choice)
@@ -28,7 +28,11 @@ public class AdminSubjectUI {
 		case 1:
 			System.out.println("Enter Subject Name:");
 			sub=scanner.next();
-			if(subjectbl.insert(sub))
+			System.out.println("Enter Start Date (dd/mon/yyyy) ");
+			startd=scanner.next();
+			System.out.println("Enter End Date (dd/mon/yyyy)");
+			endd=scanner.next();
+			if(subjectbl.insert(sub,startd,endd))
 			{
 				System.out.println("One Subject Successfully Inserted.");
 			}
@@ -42,7 +46,11 @@ public class AdminSubjectUI {
 			subId=scanner.nextInt();
 			System.out.println("Enter New Subject Name:");
 			sub=scanner.next();
-			subject=new Subject(subId,sub);
+			System.out.println("Enter New Subject Start Date:");
+			startd=scanner.next();
+			System.out.println("Enter New Subject End Date:");
+			endd=scanner.next();
+			subject=new Subject(subId,sub,startd,endd);
 			if(subjectbl.update(subId, subject))
 			{
 			System.out.println("One Subject Successfully Updated.");

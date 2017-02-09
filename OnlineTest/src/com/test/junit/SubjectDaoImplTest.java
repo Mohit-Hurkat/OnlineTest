@@ -29,7 +29,9 @@ public class SubjectDaoImplTest {
 		@Test(expected = SQLException.class)
 		public void testInsert() throws ClassNotFoundException, IOException, SQLException {
 			String subject="Trigonometry";
-			assertTrue(subjectDao.insert(subject));
+			String sub1="01,01,2017";
+			String sub2="31,12,2017";
+			assertTrue(subjectDao.insert(subject,sub1,sub2));
 		}
 
 		@Test(expected = SQLException.class)
@@ -44,5 +46,10 @@ public class SubjectDaoImplTest {
 		@Test(expected = SQLException.class)
 		public void testDisplayAll() throws ClassNotFoundException, IOException, SQLException {
 			assertNotNull(subjectDao.displayAll());
+		}
+		@Test(expected = SQLException.class)
+		public void testDelete() throws ClassNotFoundException, IOException, SQLException {
+			int subjectID=7;
+			assertTrue(subjectDao.delete(subjectID));
 		}
 }

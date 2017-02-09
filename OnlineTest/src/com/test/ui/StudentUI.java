@@ -64,7 +64,7 @@ public class StudentUI
 				}
 			System.out.println("Enter Subject-Id");
 			int subjectId=sc.nextInt();
-			tbl.check(subjectId);
+			status=tbl.check(subjectId);
 			if(status){
 			tbl.giveTest(username, subjectId);
 			}
@@ -74,7 +74,7 @@ public class StudentUI
 				return true;
 			}
 			int result=tbl.result(username, subjectId);
-			result=result*25;
+			result=result*10;
 			System.out.println("Your Score Percentage: "+result+"%");
 			break;
 		
