@@ -27,7 +27,7 @@ public class AdminStudentUI
 			System.out.println("Enter Student's UserName You Want To Search:");
 			username=scanner.next();
 			student=studentbl.search(username);
-			System.out.println(student);
+			//System.out.println(student);
 			break;
 		case 2:
 			System.out.println("Enter Student's UserName You Want To Delete:");
