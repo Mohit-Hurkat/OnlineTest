@@ -23,12 +23,13 @@ public class TestDaoImpl implements TestDao {
 			"select * FROM QUESTIONS ORDER BY DBMS_RANDOM.RANDOM)"+
 			"WHERE rownum <=10 AND SUBJECT_ID = ? AND VALUE = 0";
 	private static final String Set_Value1="update QUESTIONS SET VALUE = 1 where QUESTION_ID = ?";
-	private static final String Set_Result="INSERT INTO RESULT(USERNAME,SUBJECT_ID,RESULT,TIME_) VALUES(?,?,?,to_date(sysdate,'dd/mm/yyyy'))";
+	private static final String Set_Result="INSERT INTO RESULT(USERNAME,SUBJECT_ID,RESULT,TIME_) VALUES(?,?,?,to_date(sysdate,'yyyy-mm-dd'))";
 	private static final String Check_Result="Select USERNAME,SUBJECT_ID,RESULT from RESULT WHERE USERNAME=? AND SUBJECT_ID=? ";
 	private static final String Check_Questions="Select COUNT(*) from QUESTIONS WHERE SUBJECT_ID=? ";
 	private static final String Check_="Select COUNT(*) from SUBJECT WHERE SUBJECT_ID=? ";
 	private static final String Check_Date="Select START_DATE,END_DATE from SUBJECT WHERE SUBJECT_ID=? ";
 	private static final String Check_Result2="Select SUBJECT_ID,RESULT from RESULT WHERE USERNAME=?";
+	private static final String Check_Res="Select COUNT(*) from RESULT WHERE USERNAME =?";
 	
 	public boolean giveTest(String username,int subjectId) throws ClassNotFoundException, SQLException{
 		Scanner scanner=new Scanner(System.in);
@@ -181,8 +182,17 @@ public class TestDaoImpl implements TestDao {
 		PreparedStatement preparedStatement = connection.prepareStatement(Check_Result2);
 		preparedStatement.setString(1,username);
 		ResultSet rs1=preparedStatement.executeQuery();
-		if(rs1.next()==false){
-			System.out.println("Student hasn't given any test.");
+		PreparedStatement preparedStatement1 = connection.prepareStatement(Check_Res);
+		preparedStatement1.setString(1,username);
+		ResultSet rs2=preparedStatement1.executeQuery();	
+		while(rs2.next()){
+		res=rs2.getInt(1);
+		}
+		if(res==0){
+			System.out.println("You haven't given any test.");
+			preparedStatement1.close();
+			preparedStatement.close();
+			connection.close();
 			return false;
 		}
 		while(rs1.next()){
@@ -191,6 +201,7 @@ public class TestDaoImpl implements TestDao {
 			subject=subjectbl.search(subject_id);
 			System.out.println("Subject Name:" +subject.getSubject()+" and your Score in Percentage is "+(res*10)+"%");
 		}
+		preparedStatement1.close();
 		preparedStatement.close();
 		connection.close();
 		return true;
