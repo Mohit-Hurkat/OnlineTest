@@ -14,7 +14,7 @@ import com.test.helper.StudentAuthenticator;
 import com.test.helper.StudentData;
 
 public class HomeUI {
-	private static final String MENU_OPTIONS = "1. Sign Up" +
+	private static final String MENU_OPTIONS ="\n1. Sign Up" +
 			"\n" + "2. Sign In" + "\n" + "3. Exit";
 	private static final String EXIT_MSG = "Exit \nThank You.Please Visit Again.";
 	private static final String INVALID_CHOICE_MSG = "Invalid Choice";

@@ -16,6 +16,7 @@ import java.sql.Connection;
 import com.test.bean.Subject;
 import com.test.bl.SubjectLogic;
 import com.test.helper.JDBCConnection;
+import com.test.helper.StudentData;
 
 public class TestDaoImpl implements TestDao {
 	private static final String Set_Value="update QUESTIONS SET VALUE = 0";
@@ -30,13 +31,14 @@ public class TestDaoImpl implements TestDao {
 	private static final String Check_Date="Select START_DATE,END_DATE from SUBJECT WHERE SUBJECT_ID=? ";
 	private static final String Check_Result2="Select SUBJECT_ID,RESULT from RESULT WHERE USERNAME=?";
 	private static final String Check_Res="Select COUNT(*) from RESULT WHERE USERNAME =?";
+	private StudentData studentD=new StudentData();
 	
-	public boolean giveTest(String username,int subjectId) throws ClassNotFoundException, SQLException{
+	public boolean giveTest(String username,int subjectId) throws ClassNotFoundException, SQLException, InterruptedException{
 		Scanner scanner=new Scanner(System.in);
 		 int res3 = 0,ans1=0,count=0;
 		 int i,j,k,l;
 		 int numAffectedRows;
-		 String ans;
+		 String ans=null;
 		Connection connection = JDBCConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(Check_Questions);
 		preparedStatement.setInt(1,subjectId);
@@ -60,6 +62,9 @@ public class TestDaoImpl implements TestDao {
 			connection.close();
 			return false;
 		}
+		studentD.instruction();
+		System.out.println("Test Will Start In A Few Seconds ");
+		Thread.sleep(15000);
 		preparedStatement.close();
 		preparedStatement = connection.prepareStatement(Set_Value);
 		preparedStatement.executeUpdate();
@@ -84,7 +89,7 @@ public class TestDaoImpl implements TestDao {
 				System.out.println("Question: "+question+"\n 1. "+
 				choice1+"\n 2. "+choice2+"\n 3. "+choice3+"\n 4. "+choice4 );
 				System.out.println("Enter Your Answer Number");
-				ans=scanner.next();
+				ans=scanner.nextLine();
 				switch(ans){
 				case "1": ans=choice1;
 				break;
@@ -94,14 +99,15 @@ public class TestDaoImpl implements TestDao {
 				break;
 				case "4": ans=choice4;
 				break;
-				default:	ans=null;
+				default: ans=" ";
 					System.out.println("Invalid Choice");
-				} 
+				}
+				System.out.println("");
 				if (System.currentTimeMillis() > endTime){
 					System.out.println("Time Exceeded");
-					ans=null;
+					ans=" ";
 				}				
-				else if(ans.equals(answer)){
+				if(ans.equals(answer)){
 					count++;					
 				}
 				preparedStatement2.setInt(1,questionid);

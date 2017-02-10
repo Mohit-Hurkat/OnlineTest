@@ -9,7 +9,7 @@ import com.test.dao.TestDaoImpl;
 public class TestLogic {
 	private TestDao tdao=new TestDaoImpl();
 	
-	public boolean giveTest(String username,int sujectId) throws ClassNotFoundException, SQLException{
+	public boolean giveTest(String username,int sujectId) throws ClassNotFoundException, SQLException, InterruptedException{
 		return tdao.giveTest(username, sujectId);
 	}
 	 public int result(String username,int subjectId) throws ClassNotFoundException, SQLException{

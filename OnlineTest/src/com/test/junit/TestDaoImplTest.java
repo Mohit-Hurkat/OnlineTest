@@ -24,11 +24,11 @@ public class TestDaoImplTest {
 	}
 
 	@Test(expected = SQLException.class)
-	public void testGiveTestTrue() throws ClassNotFoundException, SQLException {
+	public void testGiveTestTrue() throws ClassNotFoundException, SQLException, InterruptedException {
 		assertTrue(testDao.giveTest("shikhar",3));
 	}
 	@Test(expected = SQLException.class)
-	public void testGiveTestFalse() throws ClassNotFoundException, SQLException {
+	public void testGiveTestFalse() throws ClassNotFoundException, SQLException, InterruptedException {
 		assertFalse(testDao.giveTest("shikhar121231",2000));
 	}
 

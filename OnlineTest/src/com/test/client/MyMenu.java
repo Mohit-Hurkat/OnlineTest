@@ -9,6 +9,7 @@ import com.test.ui.HomeUI;
 public class MyMenu {
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException{
+		System.out.println("WELCOME TO ONLINE TEST\n");
 		funtion();
 	}
 
