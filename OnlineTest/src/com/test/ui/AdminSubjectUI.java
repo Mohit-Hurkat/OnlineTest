@@ -76,6 +76,10 @@ public class AdminSubjectUI {
 			System.out.println("Enter The Subject Id You Want To Search:");
 			subId=scanner.nextInt();
 			subject=subjectbl.search(subId);
+			if(subject==null){
+				System.out.println("Subject Id doesn't Exist");
+				return true;
+			}
 			 System.out.println(subject);
 			break;
 		case 5:

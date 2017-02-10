@@ -16,6 +16,7 @@ public class AdminQuestionUI
 			"\n2.Update a question" + "\n3.Delete a Question"+ " \n4.Search a Question"+
 			"\n5.Display all Questions"+ "\n6.Exit";
 	private QuestionData qd=new QuestionData();
+	private boolean status=false;
 	
 	public void displayMenu(){
 		System.out.println();
@@ -31,30 +32,50 @@ public class AdminQuestionUI
 		{
 		case 1:
 			question=qd.input();
+			if(question==null){
+				return false;
+			}
 			questionbl.insert(question);
 			System.out.println("One Question Successfully Inserted.");
 			break;
 		case 2:
 			question=qd.update();
+			if(question==null){
+				System.out.println("Wrong SubjectId/QuestionID");
+				return false;
+			}
+			System.out.println(question);
 			questionbl.update(question.getQuestionId(), question);
 			System.out.println("One Question Successfully Updated.");
 			break;
 		case 3:
 			System.out.println("Enter The Question Id You Want To Delete:");
 			questionId=scanner.nextInt();
-			questionbl.delete(questionId);
-			System.out.println("One Question Successfully Deleted.");
+			status=questionbl.delete(questionId);
+			if(status){
+				System.out.println("One Question Successfully Deleted.");
+				return false;
+			}
+			System.out.println("QuestionID Invalid");
 			break;
 		case 4:
 			System.out.println("Enter The Question Id You Want To Search:");
 			questionId=scanner.nextInt();
 			question=questionbl.search(questionId);
+			if(question==null){
+				System.out.println("QuestionID Invalid");
+				return false;
+			}
 			 System.out.println(question.display());
 			break;
 		case 5:
 			System.out.println("Enter Subject Id:");
 			subId=scanner.nextInt();
 			List<Question> quesList=questionbl.displayAll(subId);
+			if(quesList==null){
+				System.out.println("Invalid Subject Id");
+				return false;
+			}
 			for(Question s:quesList)
 				System.out.println(s);
 			break;
